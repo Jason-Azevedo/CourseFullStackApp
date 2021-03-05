@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "description": "The backend of the course app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jason-Azevedo/CourseFullStackApp.git"
+  },
+  "author": "Jason Azevedo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jason-Azevedo/CourseFullStackApp/issues"
+  },
+  "homepage": "https://github.com/Jason-Azevedo/CourseFullStackApp#readme"
+}
