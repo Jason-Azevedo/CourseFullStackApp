@@ -1,4 +1,5 @@
 import Home from "./Pages/Home";
+import Login from "./Pages/Login";
 import SecureRoute from "./Components/SecureRoute";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./Styles/main.scss";
@@ -13,8 +14,7 @@ function App() {
 
 
         <Route path="/login">
-          {/* <Login /> */}
-          <h1>Welcome to the login page!</h1>
+          <Login />
         </Route>
         <Route path="/signup">
           {/* <Signup /> */}
