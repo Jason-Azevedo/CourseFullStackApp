@@ -6,19 +6,21 @@ import "./Styles/main.scss";
 function App() {
   return (
     <Router>
-      <SecureRoute path="/" exact="true" isAuthenticated={false}>
-        <Home />
-      </SecureRoute>
+      <Switch>
+        <SecureRoute path="/" exact="true" isAuthenticated={false}>
+          <Home />
+        </SecureRoute>
 
 
-      <Route path="/login">
-        {/* <Login /> */}
-        <h1>Welcome to the login page!</h1>
-      </Route>
-      <Route path="/signup">
-        {/* <Signup /> */}
-        <h1>Welcome to the sign up page!</h1>
-      </Route>
+        <Route path="/login">
+          {/* <Login /> */}
+          <h1>Welcome to the login page!</h1>
+        </Route>
+        <Route path="/signup">
+          {/* <Signup /> */}
+          <h1>Welcome to the sign up page!</h1>
+        </Route>
+      </Switch>
     </Router>
   );
 }
