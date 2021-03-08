@@ -1,0 +1,14 @@
+.form {
+  &__container {
+    position: absolute;
+    max-width: 500px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+  }
+
+  &__background {
+    height: 100vh;
+    background: repeating-linear-gradient(135deg, #fff, #c9cfd1 0.5%, #fff 5px);
+  }
+}
