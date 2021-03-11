@@ -7,8 +7,8 @@ export default function Login() {
     <div className="form__background">
       <div className="form__container">
         <form className="form" action="">
-          <h2 className="title--small">Course Todo App</h2>
-          <h1 className="title--large">Welcome to the login page!</h1>
+          <h2 className="title--sm">Course Todo App</h2>
+          <h1 className="title--lg">Welcome, Please Login!</h1>
 
           <FormInput inputName="username" errMsg="Invalid username" />
 

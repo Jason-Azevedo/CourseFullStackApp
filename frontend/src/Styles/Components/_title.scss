@@ -1,0 +1,18 @@
+.title {
+  letter-spacing: 0.02rem;
+
+  &--lg {
+    @extend .title;
+    color: $color-title-lg;
+  }
+
+  &--md {
+    @extend .title;
+    color: $color-title-md;
+  }
+
+  &--sm {
+    @extend .title;
+    color: $color-title-sm;
+  }
+}
