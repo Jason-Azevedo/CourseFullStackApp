@@ -1,5 +1,6 @@
 .form {
   &__container {
+    background: #fff;
     position: absolute;
     max-width: 500px;
     transform: translate(-50%, -50%);
@@ -8,7 +9,16 @@
   }
 
   &__background {
+    $white: #ffffff;
+    $grey: #aeefff;
+
     height: 100vh;
-    background: repeating-linear-gradient(135deg, #fff, #c9cfd1 0.5%, #fff 5px);
+    background: repeating-linear-gradient(
+      135deg,
+      $grey,
+      $grey 30%,
+      $white 30%,
+      $white 60%
+    );
   }
 }
