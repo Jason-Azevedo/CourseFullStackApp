@@ -10,9 +10,17 @@ export default function Login() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Welcome, Please Login!</h1>
 
-          <FormInput inputName="username" errMsg="Invalid username" />
+          <FormInput
+            htmlFor="Username"
+            inputName="username"
+            errMsg="Invalid username"
+          />
 
-          <FormInput inputName="password" errMsg="Invalid password" />
+          <FormInput
+            htmlFor="Password"
+            inputName="password"
+            errMsg="Invalid password"
+          />
 
           <p className="text">
             Don't have an account?

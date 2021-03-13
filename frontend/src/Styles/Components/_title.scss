@@ -1,18 +1,22 @@
 .title {
+  font-weight: 400;
   letter-spacing: 0.02rem;
 
   &--lg {
     @extend .title;
     color: $color-title-lg;
+    font-size: 2.5rem;
   }
 
   &--md {
     @extend .title;
     color: $color-title-md;
+    font-size: 2rem;
   }
 
   &--sm {
     @extend .title;
     color: $color-title-sm;
+    font-size: 1.75rem;
   }
 }

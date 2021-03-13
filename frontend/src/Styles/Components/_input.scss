@@ -1,0 +1,14 @@
+.input {
+  font-size: 0.95rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: #f7f7f7;
+  outline: none;
+}
+
+.input--error-msg {
+  display: block;
+  color: $input-error-color;
+  font-weight: 400;
+  margin: 0.6rem 0 0.8rem 0;
+}
