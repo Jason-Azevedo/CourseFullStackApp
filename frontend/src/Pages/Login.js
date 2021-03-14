@@ -1,5 +1,6 @@
 import React from "react";
 import FormInput from "../Components/FormInput";
+import FormInputPass from "../Components/FormInputPass";
 import { Link } from "react-router-dom";
 
 export default function Login() {
@@ -16,7 +17,7 @@ export default function Login() {
             errMsg="Invalid username"
           />
 
-          <FormInput
+          <FormInputPass
             htmlFor="Password"
             inputName="password"
             errMsg="Invalid password"
