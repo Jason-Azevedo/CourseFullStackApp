@@ -1,4 +1,5 @@
 .form {
+  // This class is used for the login and signup forms.
   &__container {
     background: #fff;
     position: absolute;
@@ -7,19 +8,25 @@
     top: 50%;
     left: 50%;
     padding: 1rem 1.5rem;
+
+    .text {
+      margin: 1rem 0;
+    }
+
+    .input {
+      width: 100%;
+      margin-right: 1rem;
+    }
   }
 
   &__background {
-    $white: #ffffff;
-    $blue: #aeefff;
-
     height: 100vh;
     background: repeating-linear-gradient(
       135deg,
-      $blue,
-      $blue 30%,
-      $white 30%,
-      $white 60%
+      $color-blue,
+      $color-blue 30%,
+      #fff 30%,
+      #fff 60%
     );
   }
 }
