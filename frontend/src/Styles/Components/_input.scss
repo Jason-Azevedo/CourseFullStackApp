@@ -22,6 +22,11 @@
   background-position: center;
   background-repeat: none;
   cursor: pointer;
+
+  &.active {
+    background-color: #33333338;
+    border-radius: 50%;
+  }
 }
 
 .input--pass-container {
