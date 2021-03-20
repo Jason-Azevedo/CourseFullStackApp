@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <SecureRoute path="/" exact="true" isAuthenticated={false}>
+        <SecureRoute path="/" exact={true} isAuthenticated={true}>
           <Home />
         </SecureRoute>
 

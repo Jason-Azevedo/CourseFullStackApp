@@ -10,12 +10,17 @@
     @extend .icon;
     background-image: url("../../Icons/eye.svg");
   }
+
+  &--cog {
+    @extend .icon;
+    background-image: url("../../Icons/gear.svg");
+  }
 }
 
 .icon--container {
   display: inline-block;
   width: 2rem;
-  height: 1.8rem;
+  height: 2rem;
   padding: 0.45rem;
 
   &.active {
