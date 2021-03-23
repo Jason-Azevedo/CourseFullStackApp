@@ -16,11 +16,8 @@ export default function FormInputPass({ htmlFor, inputName, errMsg }) {
       </label>
       <div className="input--pass-container">
         <input className="input" name={inputName} type={inputType} />
-        <div
-          className={"icon--container " + showEye}
-          onClick={() => updateInputType()}
-        >
-          <span className="icon--eye"></span>
+        <div className={"input--pass-eye-bg " + showEye}>
+          <div className="icon--eye" onClick={updateInputType}></div>
         </div>
       </div>
       <span className="input--error-msg">{errMsg}</span>
