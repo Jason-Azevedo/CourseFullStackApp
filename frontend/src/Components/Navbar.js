@@ -3,10 +3,14 @@ import React from "react";
 export default function Navbar() {
   return (
     <nav className="nav">
-      <div>Course Todo App</div>
-      <div>welcome Jason</div>
+      <h2 className="title--sm">Course Todo App</h2>
+      <p className="nav--text">
+        Welcome <strong>Jason</strong>
+      </p>
       <div className="icon--container">
-        <span className="icon--cog"></span>
+        <a href="/settings">
+          <span className="icon--cog clickable"></span>
+        </a>
       </div>
     </nav>
   );

@@ -1,11 +1,22 @@
 .icon {
+  width: 18px; // Default value
+  height: 18px; // Default value
   display: inline-block;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 
+  &.clickable {
+    cursor: pointer;
+  }
+
   &--eye {
     @extend .icon;
     background-image: url("../../Icons/eye.svg");
+  }
+
+  &--cog {
+    @extend .icon;
+    background-image: url("../../Icons/gear.svg");
   }
 }

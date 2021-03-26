@@ -17,6 +17,12 @@
   &--sm {
     @extend .title;
     color: $color-title-sm;
-    font-size: 1.75rem;
+    font-size: 1.4rem;
+  }
+
+  &--xsm {
+    @extend .title;
+    color: $color-title-sm;
+    font-size: 1.2rem;
   }
 }
