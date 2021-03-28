@@ -1,9 +1,14 @@
 .container {
+  position: relative;
   max-width: 1100px;
   margin: 0 auto;
   padding: 1rem;
 
   &.small {
     max-width: 600px;
+  }
+
+  &.home {
+    height: calc(100vh - 3.75rem);
   }
 }

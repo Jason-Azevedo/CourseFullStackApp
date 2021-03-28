@@ -8,8 +8,17 @@ export default function Home() {
         <Navbar />
       </header>
 
-      <main className="container small">
-        <h1>This is the home page!</h1>
+      <main className="container home">
+        <div className="container small">
+          <h1>This is the home page!</h1>
+        </div>
+
+        <div
+          className="floating-btn br"
+          onClick={() => alert("Floatty was clicked!")}
+        >
+          <span className="icon--cross"></span>
+        </div>
       </main>
     </>
   );

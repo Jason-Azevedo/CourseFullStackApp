@@ -1,7 +1,30 @@
 .btn {
-    border: none;
-    background: $color-blue;
-    font-size: 1rem;
-    padding: .8rem 1rem;
-    cursor: pointer;
+  border: none;
+  background: $color-blue;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+}
+
+.floating-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: $color-blue;
+  border-radius: 50%;
+  cursor: pointer;
+
+  // NOTE: br stands for bottom right
+  &.br {
+    position: absolute;
+    bottom: 2rem;
+    right: 1.5rem;
+  }
+
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }

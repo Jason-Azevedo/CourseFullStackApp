@@ -19,4 +19,9 @@
     @extend .icon;
     background-image: url("../../Icons/gear.svg");
   }
+
+  &--cross {
+    @extend .icon;
+    background-image: url("../../Icons/cross.svg");
+  }
 }

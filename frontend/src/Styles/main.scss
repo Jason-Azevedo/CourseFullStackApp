@@ -2,6 +2,10 @@
 @import "./fonts";
 @import "./Components/style-imports";
 
+#root {
+  height: 100vh;
+}
+
 * {
   padding: 0;
   margin: 0;
