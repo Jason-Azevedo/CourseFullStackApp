@@ -1,8 +1,10 @@
 import React from "react";
 
-export default function TodoDialog() {
+export default function TodoDialog({ showing, showDialog }) {
+  const show = showing === true ? "" : "hide-dialog";
+
   return (
-    <div className="todo-dialog--overlay">
+    <div className={`todo-dialog--overlay ${show}`}>
       <div className="todo-dialog">
         <h2 className="title--md">Create Todo</h2>
 
@@ -17,7 +19,9 @@ export default function TodoDialog() {
         <textarea name="" id="" cols="30" rows="10"></textarea>
 
         <div>
-          <button className="btn">Cancel</button>
+          <button className="btn" onClick={() => showDialog()}>
+            Cancel
+          </button>
           <button className="btn">Create</button>
         </div>
       </div>

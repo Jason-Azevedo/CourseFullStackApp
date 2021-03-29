@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import TodoDialog from "../Components/TodoDialog";
 
 export default function Home() {
+  // Replace [User] with the actual user's username
   document.title = "[User]'s Todos - Course Todo App";
+
+  const [isDialogShowing, setShowDialog] = useState(false);
+  const toggleDialog = () => {
+    setShowDialog((prev) => !prev);
+  };
 
   return (
     <>
@@ -17,15 +23,12 @@ export default function Home() {
         </div>
 
         {/* Floating button to add notes */}
-        <div
-          className="floating-btn br"
-          onClick={() => alert("Floatty was clicked!")}
-        >
+        <div className="floating-btn br" onClick={toggleDialog}>
           <span className="icon--cross"></span>
         </div>
       </main>
 
-      <TodoDialog />
+      <TodoDialog showing={isDialogShowing} showDialog={toggleDialog} />
     </>
   );
 }
