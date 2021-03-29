@@ -1,7 +1,10 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
+import TodoDialog from "../Components/TodoDialog";
 
 export default function Home() {
+  document.title = "[User]'s Todos - Course Todo App";
+
   return (
     <>
       <header>
@@ -10,9 +13,10 @@ export default function Home() {
 
       <main className="container home">
         <div className="container small">
-          <h1>This is the home page!</h1>
+          {/* Todos will be displayed here */}
         </div>
 
+        {/* Floating button to add notes */}
         <div
           className="floating-btn br"
           onClick={() => alert("Floatty was clicked!")}
@@ -20,6 +24,8 @@ export default function Home() {
           <span className="icon--cross"></span>
         </div>
       </main>
+
+      <TodoDialog />
     </>
   );
 }
