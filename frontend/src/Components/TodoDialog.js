@@ -17,7 +17,12 @@ export default function TodoDialog({ showing, showDialog }) {
         <label className="label" htmlFor="">
           Description
         </label>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <textarea
+          className="textarea"
+          name="todo-description"
+          cols="30"
+          rows="10"
+        ></textarea>
 
         <div>
           <button className="btn" onClick={() => showDialog()}>
