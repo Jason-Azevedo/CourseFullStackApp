@@ -7,13 +7,14 @@ export default function TodoDialog({ showing, showDialog }) {
     <div className={`todo-dialog--overlay ${show}`}>
       <div className="todo-dialog">
         <h2 className="title--md">Create Todo</h2>
+        <p className="text">Please create your todo</p>
 
-        <label className="todo-dialog__label" htmlFor="">
-          Title of Todo
+        <label className="label" htmlFor="">
+          Title
         </label>
-        <input className="todo-dialog__input" type="text" />
+        <input className="input" type="text" />
 
-        <label className="todo-dialog__label" htmlFor="">
+        <label className="label" htmlFor="">
           Description
         </label>
         <textarea name="" id="" cols="30" rows="10"></textarea>
