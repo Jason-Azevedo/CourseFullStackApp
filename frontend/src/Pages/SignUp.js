@@ -11,7 +11,7 @@ export default function SignUp() {
       <div className="form__container">
         <form className="form" action="">
           <h2 className="title--sm">Course Todo App</h2>
-          <h1 className="title--lg">Welcome, Please Create Your Account!</h1>
+          <h1 className="title--lg">Create Account</h1>
 
           <FormInput
             htmlFor="Username"
