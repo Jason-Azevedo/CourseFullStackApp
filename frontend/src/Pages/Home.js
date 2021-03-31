@@ -11,6 +11,16 @@ export default function Home() {
     setShowDialog((prev) => !prev);
   };
 
+  const dialogOptions = {
+    isShowing: isDialogShowing,
+    isEditMode: false,
+    showDialog: toggleDialog,
+    todo: { title: "", description: "" },
+
+    // This method is responsible for updating the note in the note array
+    todoMethod: () => {},
+  };
+
   return (
     <>
       <header>
@@ -22,13 +32,12 @@ export default function Home() {
           {/* Todos will be displayed here */}
         </div>
 
-        {/* Floating button to add notes */}
         <div className="floating-btn br" onClick={toggleDialog}>
           <span className="icon--cross"></span>
         </div>
       </main>
 
-      <TodoDialog showing={isDialogShowing} showDialog={toggleDialog} />
+      <TodoDialog options={dialogOptions} />
     </>
   );
 }
