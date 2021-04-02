@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import TodoDialog from "../Components/TodoDialog";
+import TodoManager from "../Components/TodoManager";
 
 export default function Home() {
   // Replace [User] with the actual user's username
@@ -29,7 +30,7 @@ export default function Home() {
 
       <main className="container home">
         <div className="container small">
-          {/* Todos will be displayed here */}
+          <TodoManager />
         </div>
 
         <div className="floating-btn br" onClick={toggleDialog}>
