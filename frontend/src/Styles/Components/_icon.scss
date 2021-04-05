@@ -24,4 +24,9 @@
     @extend .icon;
     background-image: url("../../Icons/cross.svg");
   }
+
+  &--dots {
+    @extend .icon;
+    background-image: url("../../Icons/dots.svg");
+  }
 }
