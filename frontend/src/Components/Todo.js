@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Todo() {
+export default function Todo({ title, description }) {
   return (
     <div className="todo">
       <div className="todo__header">
-        <h3 className="title--sm">Title</h3>
+        <h3 className="title--sm">{title}</h3>
         <div>
           <span className="icon--pencil clickable"></span>
           <span className="icon--trash clickable"></span>
@@ -12,7 +12,7 @@ export default function Todo() {
       </div>
 
       <hr />
-      <p className="text">Description</p>
+      <p className="text">{description}</p>
     </div>
   );
 }
