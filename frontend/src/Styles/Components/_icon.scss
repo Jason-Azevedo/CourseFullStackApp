@@ -29,4 +29,14 @@
     @extend .icon;
     background-image: url("../../Icons/dots.svg");
   }
+
+  &--pencil {
+    @extend .icon;
+    background-image: url("../../Icons/pencil.svg");
+  }
+  
+  &--trash {
+    @extend .icon;
+    background-image: url("../../Icons/trash.svg");
+  }
 }
