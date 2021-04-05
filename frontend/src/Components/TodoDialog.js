@@ -1,29 +1,30 @@
-import React from "react";
-
-// TodoDialog will take an options object that contains the following
-// showing state
-// show dialog function
-// if it is in edit mode
-// the note
-// a method to update the note state of the parent
+import React, { useState } from "react";
 
 export default function TodoDialog({ options }) {
   const show = options.isShowing ? "" : "hide-dialog";
   const title = options.isEditMode ? "Edit Todo" : "Create Todo";
-  const titleText = options.isEditMode
+  const subtitle = options.isEditMode
     ? "Please edit your todo"
     : "Please create your todo";
+
+  const [todoTitle, setTodoTitle] = useState(options.todo.title);
+  const [todoDesc, setTodoDesc] = useState(options.todo.description);
 
   return (
     <div className={`todo-dialog--overlay ${show}`}>
       <div className="todo-dialog">
         <h2 className="title--md">{title}</h2>
-        <p className="text">{titleText}</p>
+        <p className="text">{subtitle}</p>
 
         <label className="label" htmlFor="">
           Title
         </label>
-        <input className="input" type="text" value={options.todo.title} />
+        <input
+          className="input"
+          type="text"
+          value={todoTitle}
+          onChange={(e) => setTodoTitle(e.target.value)}
+        />
 
         <label className="label" htmlFor="">
           Description
@@ -33,7 +34,8 @@ export default function TodoDialog({ options }) {
           name="todo-description"
           cols="30"
           rows="10"
-          value={options.todo.description}
+          value={todoDesc}
+          onChange={(e) => setTodoDesc(e.target.value)}
         ></textarea>
 
         <div>
