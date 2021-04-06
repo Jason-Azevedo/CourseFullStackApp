@@ -10,6 +10,16 @@ export default function TodoDialog({ options }) {
   const [todoTitle, setTodoTitle] = useState(options.todo.title);
   const [todoDesc, setTodoDesc] = useState(options.todo.description);
 
+  const onCompleteClick = () => {
+    const todo = {
+      id: 0,
+      title: todoTitle,
+      description: todoDesc,
+    };
+
+    options.onComplete(todo);
+  };
+
   return (
     <div className={`todo-dialog--overlay ${show}`}>
       <div className="todo-dialog">
@@ -39,10 +49,12 @@ export default function TodoDialog({ options }) {
         ></textarea>
 
         <div>
-          <button className="btn" onClick={() => options.showDialog()}>
+          <button className="btn" onClick={options.showDialog}>
             Cancel
           </button>
-          <button className="btn">Create</button>
+          <button className="btn" onClick={onCompleteClick}>
+            Create
+          </button>
         </div>
       </div>
     </div>

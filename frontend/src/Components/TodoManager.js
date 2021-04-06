@@ -14,8 +14,8 @@ const testTodoData = [
   },
 ];
 
-export default function TodoManager() {
-  const [todos, setTodos] = useState(testTodoData);
+export default function TodoManager({ todoArr, onEdit, onDelete }) {
+  const [todos, setTodos] = useState(todoArr);
 
   const todoCards = todos.map((todo) => (
     <Todo title={todo.title} description={todo.description} />
