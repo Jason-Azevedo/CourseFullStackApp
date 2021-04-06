@@ -21,13 +21,8 @@ export default function Home() {
   document.title = "[User]'s Todos - Course Todo App";
 
   const [todos, setTodos] = useState(testTodoData);
-  const createTodo = (todo) =>
-    setTodos((prev) => {
-      // FIXME: I shouldn't be returning the orignal now modified array.
-      prev.push(todo);
-      return prev;
-    });
-  const editTodo = () => {};
+  const createTodo = (todo) => setTodos([...todos, todo]);
+  const editTodo = (todo) => {};
   const deleteTodo = () => {};
 
   const [isDialogShowing, setShowDialog] = useState(false);

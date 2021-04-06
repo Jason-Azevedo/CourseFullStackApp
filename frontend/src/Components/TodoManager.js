@@ -1,23 +1,8 @@
 import React, { useState } from "react";
 import Todo from "./Todo";
 
-const testTodoData = [
-  {
-    id: 0,
-    title: "Test Note",
-    description: "This is the description of the test note",
-  },
-  {
-    id: 1,
-    title: "Second Test Note",
-    description: "This is the second test todo",
-  },
-];
-
 export default function TodoManager({ todoArr, onEdit, onDelete }) {
-  const [todos, setTodos] = useState(todoArr);
-
-  const todoCards = todos.map((todo) => (
+  const todoCards = todoArr.map((todo) => (
     <Todo title={todo.title} description={todo.description} />
   ));
 
