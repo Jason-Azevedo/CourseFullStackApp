@@ -9,11 +9,6 @@ const testTodoData = [
     title: "Test Note",
     description: "This is the description of the test note",
   },
-  {
-    id: 1,
-    title: "Second Test Note",
-    description: "This is the second test todo",
-  },
 ];
 
 export default function Home() {
@@ -22,13 +17,17 @@ export default function Home() {
 
   const [todos, setTodos] = useState(testTodoData);
   const createTodo = (todo) => setTodos([...todos, todo]);
-  const editTodo = (todo) => {};
-  const deleteTodo = () => {};
+  const editTodo = (todo) => {
+    dialogOptions.todo = todo;
+    dialogOptions.isEditMode = true;
+    toggleDialog();
+
+    // TODO: Edit the todo in the array
+  };
+  const deleteTodo = (todo) => console.log(todo.id + " said delete me!");
 
   const [isDialogShowing, setShowDialog] = useState(false);
-  const toggleDialog = () => {
-    setShowDialog((prev) => !prev);
-  };
+  const toggleDialog = () => setShowDialog((prev) => !prev);
 
   const DialogOptions = function () {
     this.isShowing = isDialogShowing;
@@ -52,7 +51,11 @@ export default function Home() {
 
       <main className="container home">
         <div className="container small">
-          <TodoManager todoArr={todos} />
+          <TodoManager
+            todoArr={todos}
+            onEdit={editTodo}
+            onDelete={deleteTodo}
+          />
         </div>
 
         <div className="floating-btn br" onClick={toggleDialog}>

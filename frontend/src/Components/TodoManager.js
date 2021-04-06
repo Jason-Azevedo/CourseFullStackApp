@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Todo from "./Todo";
 
 export default function TodoManager({ todoArr, onEdit, onDelete }) {
   const todoCards = todoArr.map((todo) => (
-    <Todo title={todo.title} description={todo.description} />
+    <Todo todo={todo} onEdit={onEdit} onDelete={onDelete} key={todo.id} />
   ));
 
   return <>{todoCards}</>;
