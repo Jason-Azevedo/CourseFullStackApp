@@ -19,6 +19,9 @@ export default function TodoDialog({ options }) {
       description: todoDesc,
     };
 
+    setTodoTitle("");
+    setTodoDesc("");
+
     options.onComplete(todo);
   };
 

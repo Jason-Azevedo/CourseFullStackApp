@@ -16,11 +16,12 @@ export default function Home() {
   document.title = "[User]'s Todos - Course Todo App";
 
   const [todos, setTodos] = useState(testTodoData);
-  const createTodo = (todo) => setTodos([...todos, todo]);
+  const createTodo = (todo) => setTodos((prev) => [...prev, todo]);
   const editTodo = (todo) => {
-    toggleDialog(true);
-
     // TODO: Edit the todo in the array
+    const tempArr = todos.map((t) => t.id !== todo.id);
+    console.log("Here is the array:");
+    console.log(tempArr);
   };
   const deleteTodo = (todo) => console.log(todo.id + " said delete me!");
 
@@ -56,7 +57,7 @@ export default function Home() {
         <div className="container small">
           <TodoManager
             todoArr={todos}
-            onEdit={editTodo}
+            onEdit={() => toggleDialog(true)}
             onDelete={deleteTodo}
           />
         </div>
