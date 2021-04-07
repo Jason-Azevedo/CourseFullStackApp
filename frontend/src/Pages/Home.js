@@ -18,19 +18,22 @@ export default function Home() {
   const [todos, setTodos] = useState(testTodoData);
   const createTodo = (todo) => setTodos([...todos, todo]);
   const editTodo = (todo) => {
-    dialogOptions.todo = todo;
-    dialogOptions.isEditMode = true;
-    toggleDialog();
+    toggleDialog(true);
 
     // TODO: Edit the todo in the array
   };
   const deleteTodo = (todo) => console.log(todo.id + " said delete me!");
 
-  const [isDialogShowing, setShowDialog] = useState(false);
-  const toggleDialog = () => setShowDialog((prev) => !prev);
+  const toggleDialog = (isEditMode = false) =>
+    setDialogOptions((prev) => {
+      const obj = { ...prev };
+      obj.isShowing = !prev.isShowing;
+      obj.isEditMode = isEditMode;
+      return obj;
+    });
 
   const DialogOptions = function () {
-    this.isShowing = isDialogShowing;
+    this.isShowing = false;
     this.isEditMode = false;
     this.showDialog = toggleDialog;
     this.todo = { id: 0, title: "", description: "" };
@@ -41,7 +44,7 @@ export default function Home() {
       toggleDialog();
     };
   };
-  const dialogOptions = new DialogOptions();
+  const [dialogOptions, setDialogOptions] = useState(new DialogOptions());
 
   return (
     <>

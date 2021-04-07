@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 export default function TodoDialog({ options }) {
   const show = options.isShowing ? "" : "hide-dialog";
-  const title = options.isEditMode ? "Edit Todo" : "Create Todo";
-  const subtitle = options.isEditMode
-    ? "Please edit your todo"
-    : "Please create your todo";
+  const title = options.isEditMode === true ? "Edit Todo" : "Create Todo";
+  const buttonText = options.isEditMode === true ? "Edit" : "Create";
+  const subtitle =
+    options.isEditMode === true
+      ? "Please edit your todo"
+      : "Please create your todo";
 
   const [todoTitle, setTodoTitle] = useState(options.todo.title);
   const [todoDesc, setTodoDesc] = useState(options.todo.description);
@@ -53,7 +55,7 @@ export default function TodoDialog({ options }) {
             Cancel
           </button>
           <button className="btn" onClick={onCompleteClick}>
-            Create
+            {buttonText}
           </button>
         </div>
       </div>
