@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
-import TodoDialog from "../Components/TodoDialog";
+import CreateTodoDialog from "../Components/TodoDialog/CreateTodoDialog";
+import EditTodoDialog from "../Components/TodoDialog/EditTodoDialog";
 import TodoManager from "../Components/TodoManager";
 
 const testTodoData = [
@@ -25,27 +26,27 @@ export default function Home() {
   };
   const deleteTodo = (todo) => console.log(todo.id + " said delete me!");
 
-  const toggleDialog = (isEditMode = false) =>
-    setDialogOptions((prev) => {
-      const obj = { ...prev };
-      obj.isShowing = !prev.isShowing;
-      obj.isEditMode = isEditMode;
-      return obj;
-    });
+  // Dialog related state
+  const [dialogOptions, setDialogOptions] = useState({
+    isEdit: false,
+    showing: false,
+  });
+  const hideDialog = () => setDialogOptions({ isEdit: false, showing: false });
+  const ShowDialog = () => {
+    if (!dialogOptions.showing) return <> </>;
 
-  const DialogOptions = function () {
-    this.isShowing = false;
-    this.isEditMode = false;
-    this.showDialog = toggleDialog;
-    this.todo = { id: 0, title: "", description: "" };
-    this.onComplete = (todo) => {
-      if (this.isEditMode) editTodo(todo);
-      else createTodo(todo);
-
-      toggleDialog();
-    };
+    if (dialogOptions.isEdit === true) return <EditTodoDialog />;
+    else
+      return (
+        <CreateTodoDialog
+          onComplete={(todo) => {
+            createTodo(todo);
+            hideDialog();
+          }}
+          onCancel={hideDialog}
+        />
+      );
   };
-  const [dialogOptions, setDialogOptions] = useState(new DialogOptions());
 
   return (
     <>
@@ -57,17 +58,20 @@ export default function Home() {
         <div className="container small">
           <TodoManager
             todoArr={todos}
-            onEdit={() => toggleDialog(true)}
+            // onEdit={() => toggleDialog(true)}
             onDelete={deleteTodo}
           />
         </div>
 
-        <div className="floating-btn br" onClick={toggleDialog}>
+        <div
+          className="floating-btn br"
+          onClick={() => setDialogOptions({ isEdit: false, showing: true })}
+        >
           <span className="icon--cross"></span>
         </div>
       </main>
 
-      <TodoDialog options={dialogOptions} />
+      {ShowDialog()}
     </>
   );
 }
