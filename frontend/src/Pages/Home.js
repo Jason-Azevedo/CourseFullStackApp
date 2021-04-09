@@ -31,21 +31,34 @@ export default function Home() {
     isEdit: false,
     showing: false,
   });
-  const hideDialog = () => setDialogOptions({ isEdit: false, showing: false });
+  const toggleDialog = (editMode = false, show = false, todo) =>
+    setDialogOptions({ isEdit: editMode, showing: show, todo: todo });
+
   const ShowDialog = () => {
     if (!dialogOptions.showing) return <> </>;
 
-    if (dialogOptions.isEdit === true) return <EditTodoDialog />;
-    else
+    if (dialogOptions.isEdit === true) {
+      return (
+        <EditTodoDialog
+          todo={dialogOptions.todo}
+          onComplete={(todo) => {
+            editTodo(todo);
+            toggleDialog();
+          }}
+          onCancel={toggleDialog}
+        />
+      );
+    } else {
       return (
         <CreateTodoDialog
           onComplete={(todo) => {
             createTodo(todo);
-            hideDialog();
+            toggleDialog();
           }}
-          onCancel={hideDialog}
+          onCancel={toggleDialog}
         />
       );
+    }
   };
 
   return (
@@ -58,14 +71,15 @@ export default function Home() {
         <div className="container small">
           <TodoManager
             todoArr={todos}
-            // onEdit={() => toggleDialog(true)}
+            // Insert the todo in this method
+            onEdit={(todo) => toggleDialog(true, true, todo)}
             onDelete={deleteTodo}
           />
         </div>
 
         <div
           className="floating-btn br"
-          onClick={() => setDialogOptions({ isEdit: false, showing: true })}
+          onClick={() => toggleDialog(false, true)}
         >
           <span className="icon--cross"></span>
         </div>

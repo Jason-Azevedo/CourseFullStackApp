@@ -4,11 +4,12 @@ export default function TodoDialog({
   title,
   subtitle,
   buttonText,
+  todo = { title: "", description: "" },
   onComplete,
   onCancel,
 }) {
-  const [todoTitle, setTodoTitle] = useState("");
-  const [todoDesc, setTodoDesc] = useState("");
+  const [todoTitle, setTodoTitle] = useState(todo.title);
+  const [todoDesc, setTodoDesc] = useState(todo.description);
   const [requiredText, setRequiredText] = useState("");
 
   const onCreateClick = () => {
@@ -43,6 +44,7 @@ export default function TodoDialog({
         <input
           className="input"
           type="text"
+          value={todoTitle}
           onChange={(e) => setTodoTitle(e.target.value)}
         />
 
@@ -54,6 +56,7 @@ export default function TodoDialog({
           name="todo-description"
           cols="30"
           rows="10"
+          value={todoDesc}
           onChange={(e) => setTodoDesc(e.target.value)}
         ></textarea>
 
