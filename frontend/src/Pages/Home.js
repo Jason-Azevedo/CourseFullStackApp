@@ -17,14 +17,34 @@ export default function Home() {
   document.title = "[User]'s Todos - Course Todo App";
 
   const [todos, setTodos] = useState(testTodoData);
-  const createTodo = (todo) => setTodos((prev) => [...prev, todo]);
+  // In these methods make calls to the server api for the todo crud operations
+  // then refresh the todos from the server.
+  const createTodo = (todo) =>
+    setTodos((prev) => {
+      todo.id = prev.length;
+      return [...prev, todo];
+    });
   const editTodo = (todo) => {
-    // TODO: Edit the todo in the array
-    const tempArr = todos.map((t) => t.id !== todo.id);
-    console.log("Here is the array:");
-    console.log(tempArr);
+    // find the element
+    const tempArr = todos.map((oldTodo) => {
+      if (oldTodo.id !== todo.id) return oldTodo;
+      else if (oldTodo.id === todo.id) {
+        return todo;
+      }
+    });
+
+    setTodos(tempArr);
   };
-  const deleteTodo = (todo) => console.log(todo.id + " said delete me!");
+  const deleteTodo = (todo) => {
+    const tempArr = [];
+    todos.forEach((oldTodo) => {
+      if (oldTodo.id !== todo.id) {
+        tempArr.push(oldTodo);
+      }
+    });
+
+    setTodos(tempArr);
+  };
 
   // Dialog related state
   const [dialogOptions, setDialogOptions] = useState({

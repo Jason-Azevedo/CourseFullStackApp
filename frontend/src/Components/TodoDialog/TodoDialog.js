@@ -4,7 +4,7 @@ export default function TodoDialog({
   title,
   subtitle,
   buttonText,
-  todo = { title: "", description: "" },
+  todo = { id: 0, title: "", description: "" },
   onComplete,
   onCancel,
 }) {
@@ -18,7 +18,7 @@ export default function TodoDialog({
       return;
     }
 
-    onComplete({ title: todoTitle, description: todoDesc });
+    onComplete({ id: todo.id, title: todoTitle, description: todoDesc });
     clearState();
   };
 
