@@ -1,6 +1,9 @@
 .text {
+  max-width: 100%;
   font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 0.02rem;
   color: $font-color;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
