@@ -1,6 +1,4 @@
 import React from "react";
-import FormInput from "../Components/FormInput";
-import FormInputPass from "../Components/FormInputPass";
 import { Link } from "react-router-dom";
 
 export default function SignUp() {
@@ -13,22 +11,36 @@ export default function SignUp() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Create Account</h1>
 
-          <FormInput
-            htmlFor="Username"
-            inputName="username"
-            errMsg="Invalid username"
+          <p className="error-message">Error Message Here!</p>
+
+          <label className="label" htmlFor="username-input">
+            Username
+          </label>
+          <input
+            className="input"
+            id="username-input"
+            name="username"
+            type="text"
           />
 
-          <FormInputPass
-            htmlFor="Password"
-            inputName="password"
-            errMsg="Invalid password"
+          <label className="label" htmlFor="password-input">
+            Password
+          </label>
+          <input
+            className="input"
+            id="password-input"
+            name="password"
+            type="text"
           />
 
-          <FormInputPass
-            htmlFor="Verify Password"
-            inputName="verify-password"
-            errMsg="Invalid password"
+          <label className="label" htmlFor="password-input-confirm">
+            Confirm Password
+          </label>
+          <input
+            className="input"
+            id="password-input-confirm"
+            name="password"
+            type="text"
           />
 
           <p className="text">
