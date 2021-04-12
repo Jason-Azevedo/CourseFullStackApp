@@ -30,7 +30,7 @@ export default function SignUp() {
             className="input"
             id="password-input"
             name="password"
-            type="text"
+            type="password"
           />
 
           <label className="label" htmlFor="password-input-confirm">
@@ -40,7 +40,7 @@ export default function SignUp() {
             className="input"
             id="password-input-confirm"
             name="password"
-            type="text"
+            type="password"
           />
 
           <p className="text">

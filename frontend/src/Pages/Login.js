@@ -30,7 +30,7 @@ export default function Login() {
             className="input"
             id="password-input"
             name="password"
-            type="text"
+            type="password"
           />
 
           <p className="text">
