@@ -1,10 +1,8 @@
 import React from "react";
-import FormInput from "../Components/FormInput";
-import FormInputPass from "../Components/FormInputPass";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-  document.title = "Log In - TodoApp";
+  document.title = "Login - TodoApp";
 
   return (
     <div className="form__background">
@@ -13,16 +11,26 @@ export default function Login() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Login</h1>
 
-          <FormInput
-            htmlFor="Username"
-            inputName="username"
-            errMsg="Invalid username"
+          <p className="error-message">Error Message Here!</p>
+
+          <label className="label" htmlFor="username-input">
+            Username
+          </label>
+          <input
+            className="input"
+            id="username-input"
+            name="username"
+            type="text"
           />
 
-          <FormInputPass
-            htmlFor="Password"
-            inputName="password"
-            errMsg="Invalid password"
+          <label className="label" htmlFor="password-input">
+            Password
+          </label>
+          <input
+            className="input"
+            id="password-input"
+            name="password"
+            type="text"
           />
 
           <p className="text">
