@@ -3,6 +3,7 @@ import Navbar from "../Components/Navbar";
 import CreateTodoDialog from "../Components/TodoDialog/CreateTodoDialog";
 import EditTodoDialog from "../Components/TodoDialog/EditTodoDialog";
 import TodoManager from "../Components/TodoManager";
+import Dialog from "../Components/Dialog";
 
 const testTodoData = [
   {
@@ -106,6 +107,11 @@ export default function Home() {
       </main>
 
       {ShowDialog()}
+      <Dialog
+        message="Hello World"
+        onOk={() => console.log("ok")}
+        onCancel={() => console.log("cancel")}
+      />
     </>
   );
 }
