@@ -25,7 +25,6 @@ export default function Home() {
       return [...prev, todo];
     });
   const editTodo = (todo) => {
-    // find the element
     const tempArr = todos.map((oldTodo) => {
       if (oldTodo.id !== todo.id) return oldTodo;
       else if (oldTodo.id === todo.id) {
@@ -91,7 +90,6 @@ export default function Home() {
         <div className="container small">
           <TodoManager
             todoArr={todos}
-            // Insert the todo in this method
             onEdit={(todo) => toggleDialog(true, true, todo)}
             onDelete={deleteTodo}
           />
