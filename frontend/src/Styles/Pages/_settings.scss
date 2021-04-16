@@ -1,6 +1,4 @@
 .settings-page {
-  .container.small {
-  }
   .settings-header {
     display: flex;
     align-items: center;
@@ -8,6 +6,26 @@
   }
 
   .setting-block {
-    margin-top: 1rem;
+    margin: 1rem 0;
+
+    .text {
+      margin: 0.5rem 0;
+    }
+
+    .input {
+      margin-top: 1rem;
+      min-width: 50%;
+    }
+
+    .input,
+    .label {
+      display: inline;
+    }
+  }
+
+  .setting-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
