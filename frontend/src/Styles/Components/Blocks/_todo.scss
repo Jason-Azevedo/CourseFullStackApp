@@ -1,0 +1,35 @@
+.todo {
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+  border: 1px solid #cacaca;
+  box-shadow: 0px 0px 3px 3px #3333331e;
+  border-radius: 8px;
+
+  &__header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon--trash {
+      margin-left: 1rem;
+    }
+  }
+
+  &__context-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  hr {
+    border-top: 0px;
+    border-color: #c0c0c0;
+    margin: 1rem 0 1rem 0;
+  }
+}

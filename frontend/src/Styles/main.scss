@@ -1,5 +1,23 @@
+@import "./vars";
+@import "./fonts";
+@import "./Components/style-imports";
+@import "./Pages/page-imports";
+
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+p,
+span,
+label,
+input {
+  font-weight: 300;
 }

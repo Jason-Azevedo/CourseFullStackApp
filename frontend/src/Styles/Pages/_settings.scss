@@ -1,0 +1,31 @@
+.settings-page {
+  .settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .setting-block {
+    margin: 1rem 0;
+
+    .text {
+      margin: 0.5rem 0;
+    }
+
+    .input {
+      margin-top: 1rem;
+      min-width: 50%;
+    }
+
+    .input,
+    .label {
+      display: inline;
+    }
+  }
+
+  .setting-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

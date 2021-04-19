@@ -1,0 +1,46 @@
+.input {
+  font-size: 0.95rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: #f7f7f7;
+  outline: none;
+}
+
+.input--error-msg {
+  display: block;
+  color: $input-error-color;
+  font-weight: 400;
+  margin: 0.6rem 0 0.8rem 0;
+}
+
+.input--pass-eye-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem 0.05rem;
+  border-radius: 50%;
+
+  &.active {
+    background: #c5c5c5;
+    border-radius: 50%;
+  }
+
+  &,
+  &.active {
+    transition: 0.25s;
+  }
+}
+
+.input--pass-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0.8rem;
+  background-color: #f7f7f7;
+
+  .icon--eye {
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
+  }
+}
