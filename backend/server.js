@@ -1,16 +1,11 @@
 const express = require("express");
-const session = require("express-session");
-const cors = require("cors");
 const app = express();
 
 // Load enviorment variables
 require("dotenv").config();
 
 // App variables
-const PORT = process.env.PORT || 8080;
-
-// Middlewares
-app.use(cors);
+const PORT = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
   res.send("Welcome to the course todo app!");
