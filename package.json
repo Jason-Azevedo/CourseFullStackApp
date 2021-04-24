@@ -1,0 +1,23 @@
+{
+  "name": "coursefullstackapp",
+  "version": "1.0.0",
+  "description": "The full stack app of the course.  It is a simple todo app with user accounts.",
+  "main": "index.js",
+  "scripts": {
+    "dev:start": "concurrently \"cd backend && npm run dev:start\" \"cd frontend && npm run start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jason-Azevedo/CourseFullStackApp.git"
+  },
+  "keywords": [],
+  "author": "Jason Azevedo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jason-Azevedo/CourseFullStackApp/issues"
+  },
+  "homepage": "https://github.com/Jason-Azevedo/CourseFullStackApp#readme",
+  "devDependencies": {
+    "concurrently": "^6.0.2"
+  }
+}
