@@ -8,10 +8,10 @@ require("dotenv").config();
 // App variables
 const PORT = process.env.PORT || 3001;
 
-// Midllewares
+// Middlewares
 
-// Register Routes
-Routes.route(app);
+// Leave routes last!!
+Routes.registerRoutes(app);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server listening at http://localhost:${PORT}`);

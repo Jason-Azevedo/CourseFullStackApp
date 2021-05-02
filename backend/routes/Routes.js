@@ -7,7 +7,7 @@ router.route("/").get((req, res) => {
   res.send("Hello World, from router!");
 });
 
-const route = (app) => {
+const registerRoutes = (app) => {
   // Register routes here
   app.use("/todo", TodoRoutes);
   app.use("/user", UserRoutes);
@@ -16,4 +16,4 @@ const route = (app) => {
   app.use("/", router);
 };
 
-exports.route = route;
+exports.registerRoutes = registerRoutes;
