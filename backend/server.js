@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3001;
 db.connect(process.env.MONGO_URI || "mongodb://localhost/todoapp");
 
 // Middlewares
+app.use(express.json());
 
 // Leave routes last!!
 Routes.registerRoutes(app);

@@ -9,20 +9,20 @@ const UserSchema = new mongoose.Schema({
 const UserModel = mongoose.model("User", UserSchema);
 
 // CRUD Methods:
-function createUser(user) {
+async function createUser(user) {
   const newUser = await new UserModel(user);
-  newUser.save();
+  return newUser.save();
 }
 
-function editUser(user) {
-  return await UserModel.updateOne({_id: user._id}, user)
+async function editUser(user) {
+  return await UserModel.updateOne({ _id: user._id }, user);
 }
 
-function getUser(username) {
-  return await UserModel.findOne({username: username});
+async function getUser(username) {
+  return await UserModel.findOne({ username: username });
 }
-function deleteUser(username) {
-  return await UserModel.remove({username: username});
+async function deleteUser(username) {
+  return await UserModel.remove({ username: username });
 }
 
 exports.create = createUser;
