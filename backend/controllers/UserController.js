@@ -1,25 +1,32 @@
 const UserModel = require("../models/UserModel");
 
-exports.login = async function (req, res) {
+exports.login = function (req, res) {
   // Validate the user credentials
   const userCredentials = {
     username: req.body.username,
     password: req.body.password,
   };
 
-  const user = await UserModel.find(userCredentials.username);
+  UserModel.find(userCredentials.username)
+    .then((user) => {
+      if (user === null) {
+        res.json({ error: "User doesn't exist" });
+        return;
+      }
 
-  if (userCredentials.username !== user.username) {
-    res.json({ error: "Invalid credentials" });
-    return;
-  } else if (userCredentials.password !== user.password) {
-    res.json({ error: "Invalid credentials" });
-    return;
-  }
+      if (userCredentials.username !== user.username) {
+        res.json({ error: "Invalid credentials" });
+        return;
+      } else if (userCredentials.password !== user.password) {
+        res.json({ error: "Invalid credentials" });
+        return;
+      }
 
-  // User should be legit
-  req.session.isLoggedIn = true;
-  res.json({ redirect: "/", username: user.username });
+      // User should be legit
+      req.session.isLoggedIn = true;
+      res.json({ redirect: "/", username: user.username });
+    })
+    .catch(console.error);
 };
 
 exports.logout = function (req, res) {
@@ -39,9 +46,17 @@ exports.createUser = function (req, res) {
     .catch((err) => {
       console.log(err);
 
-      if (err.code === 11000) res.json({ error: "User already exists" });
-      else res.json({ error: "An error occured" });
+      if (err.code === 11000) {
+        res.json({ error: "User already exists" });
+        return;
+      } else {
+        res.json({ error: "An error occured" });
+      }
     });
 };
-exports.editUser = function (req, res) {};
-exports.deleteUser = function (req, res) {};
+exports.editUser = function (req, res) {
+  res.json({ error: "Still in development!" });
+};
+exports.deleteUser = function (req, res) {
+  res.json({ error: "Still in development!" });
+};

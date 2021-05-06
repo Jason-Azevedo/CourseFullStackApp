@@ -1,13 +1,11 @@
 const router = require("express").Router();
 const UserController = require("../controllers/UserController");
-const AuthRoute = require("./AuthRoute");
-
-router.use("/", AuthRoute.AuthHandler);
+const AuthHandler = require("./AuthHandler");
 
 router
   .route("/")
   .post(UserController.createUser)
-  .patch(UserController.editUser)
-  .delete(UserController.deleteUser);
+  .patch(AuthHandler, UserController.editUser)
+  .delete(AuthHandler, UserController.deleteUser);
 
 module.exports = router;
