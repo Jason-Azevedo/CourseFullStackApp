@@ -1,13 +1,8 @@
 const router = require("express").Router();
 const UserController = require("../controllers/UserController");
+const AuthRoute = require("./AuthRoute");
 
-router.get("/", (req, res) => {
-  res.send("This is from the user page!!");
-});
-
-router.post("/login", UserController.login);
-
-router.get("/logout", UserController.logout);
+router.use("/", AuthRoute.AuthHandler);
 
 router
   .route("/")
