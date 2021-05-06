@@ -1,12 +1,30 @@
 const UserModel = require("../models/UserModel");
 
-exports.login = function (req, res) {
-  // Log the user in!
-  // Then return their updated state {username}
+exports.login = async function (req, res) {
+  // Validate the user credentials
+  const userCredentials = {
+    username: req.body.username,
+    password: req.body.password,
+  };
+
+  const user = await UserModel.find(userCredentials.username);
+
+  if (userCredentials.username !== user.username) {
+    res.json({ error: "Invalid credentials" });
+    return;
+  } else if (userCredentials.password !== user.password) {
+    res.json({ error: "Invalid credentials" });
+    return;
+  }
+
+  // User should be legit
+  req.session.isLoggedIn = true;
+  res.json({ redirect: "/", username: user.username });
 };
 
 exports.logout = function (req, res) {
-  // Logout
+  if (req.session.isLoggedIn) req.session.isLoggedIn = false;
+  res.json({ redirect: "/login" });
 };
 
 exports.createUser = function (req, res) {
@@ -17,7 +35,7 @@ exports.createUser = function (req, res) {
 
   const newUser = { username: req.body.username, password: req.body.password };
   UserModel.create(newUser)
-    .then(() => res.redirect("/login"))
+    .then(() => res.json({ redirect: "/login" }))
     .catch((err) => {
       console.log(err);
 
