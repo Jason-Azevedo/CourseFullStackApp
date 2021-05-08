@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ValidateInput from "../Utils/ValidateInput";
+import ErrorMessage from "../Components/ErrorMessage";
 
 export default function Login() {
   document.title = "Login - TodoApp";
 
   const [userCredentials, setUserCredentials] = useState({});
   const [errorMessage, setErrorMessage] = useState();
-  const showError = () => {
-    if (errorMessage !== "" && errorMessage !== undefined) {
-      return <p className="error-message">{errorMessage}</p>;
-    }
-  };
 
   const onLoginClick = (e) => {
     e.preventDefault();
@@ -33,7 +29,7 @@ export default function Login() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Login</h1>
 
-          {showError()}
+          <ErrorMessage err={errorMessage} />
 
           <label className="label" htmlFor="username-input">
             Username
