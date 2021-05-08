@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ValidateInput from "../Utils/ValidateInput";
 
 export default function Login() {
   document.title = "Login - TodoApp";
@@ -14,20 +15,12 @@ export default function Login() {
 
   const onLoginClick = (e) => {
     e.preventDefault();
-    console.log(userCredentials);
-    console.log(errorMessage);
 
     // Validate the inputs to not be empty!
-    if (
-      userCredentials.username === "" ||
-      userCredentials.username === undefined
-    ) {
+    if (!ValidateInput(userCredentials.username, { notEmpty: true })) {
       setErrorMessage("Username cannot be empty!");
       return;
-    } else if (
-      userCredentials.password === "" ||
-      userCredentials.password === undefined
-    ) {
+    } else if (!ValidateInput(userCredentials.password, { notEmpty: true })) {
       setErrorMessage("Password cannot be empty!");
       return;
     } else setErrorMessage("");
