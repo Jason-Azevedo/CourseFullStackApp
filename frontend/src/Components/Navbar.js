@@ -1,12 +1,20 @@
 import React from "react";
+import BackendApi from "../Utils/Backend";
 
-export default function Navbar() {
+export default function Navbar({ username }) {
+  const onLogoutClick = (e) => {
+    e.preventDefault();
+    BackendApi.logout();
+  };
+
   return (
     <nav className="nav">
       <h2 className="title--sm">Course Todo App</h2>
       <p className="nav--text">
-        {/* TODO: Implement the signout function */}
-        Welcome <strong>Jason</strong> <a href="/login" className="link"> [Sign Out]</a>
+        Welcome <strong>{username}</strong>
+        <a href="#" className="link" onClick={onLogoutClick}>
+          [Sign Out]
+        </a>
       </p>
       <div className="icon--container">
         <a href="/settings">

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { GlobalContext } from "../App";
 import Navbar from "../Components/Navbar";
 import CreateTodoDialog from "../Components/TodoDialog/CreateTodoDialog";
 import EditTodoDialog from "../Components/TodoDialog/EditTodoDialog";
@@ -13,8 +14,8 @@ const testTodoData = [
 ];
 
 export default function Home() {
-  // Replace [User] with the actual user's username
-  document.title = "[User]'s Todos - Course Todo App";
+  const { context } = useContext(GlobalContext);
+  document.title = `${context.username}'s Todos - Course Todo App`;
 
   const [todos, setTodos] = useState(testTodoData);
   // In these methods make calls to the server api for the todo crud operations
@@ -83,7 +84,7 @@ export default function Home() {
   return (
     <>
       <header>
-        <Navbar />
+        <Navbar username={context.username} />
       </header>
 
       <main className="container home">

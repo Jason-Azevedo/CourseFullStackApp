@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ValidateInput from "../Utils/ValidateInput";
 import ErrorMessage from "../Components/ErrorMessage";
-import Backend from "../Utils/Backend";
+import BackendApi from "../Utils/Backend";
+import { GlobalContext } from "../App";
 
 export default function Login() {
   document.title = "Login - TodoApp";
 
   const [userCredentials, setUserCredentials] = useState({});
   const [errorMessage, setErrorMessage] = useState();
+  const context = useContext(GlobalContext);
 
   const onLoginClick = (e) => {
     e.preventDefault();
-    e.stopPropagation();
 
     // Validate the inputs to not be empty!
     if (!ValidateInput(userCredentials.username, { notEmpty: true })) {
@@ -24,19 +25,19 @@ export default function Login() {
     } else setErrorMessage("");
 
     // Log the user in and then redirect to homepage!
-    Backend.login(userCredentials.username, userCredentials.password).then(
+    BackendApi.login(userCredentials.username, userCredentials.password).then(
       (res) => {
-        console.log(res.error);
         if (res.error !== "" && res.error !== undefined) {
           setErrorMessage(res.error);
-          console.log("returning");
           return;
         }
 
         // Update the global context
+        localStorage.setItem("username", res.username);
+        context.update(true, res.username);
 
         // Redirect
-        window.location = res.redirect;
+        window.location = "/";
       }
     );
   };
