@@ -49,7 +49,7 @@ export default function Login() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Login</h1>
 
-          <ErrorMessage err={errorMessage} />
+          <ErrorMessage error={errorMessage} />
 
           <label className="label" htmlFor="username-input">
             Username

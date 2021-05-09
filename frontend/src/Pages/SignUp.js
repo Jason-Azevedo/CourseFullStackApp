@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ErrorMessage from "../Components/ErrorMessage";
 
 export default function SignUp() {
   document.title = "Sign Up - TodoApp";
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   return (
     <div className="form__background">
@@ -11,7 +14,7 @@ export default function SignUp() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Create Account</h1>
 
-          <p className="error-message">Error Message Here!</p>
+          <ErrorMessage error={errorMessage} />
 
           <label className="label" htmlFor="username-input">
             Username
