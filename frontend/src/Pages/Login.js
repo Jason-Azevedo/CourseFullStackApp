@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import ValidateInput from "../Utils/ValidateInput";
 import ErrorMessage from "../Components/ErrorMessage";
+import Backend from "../Utils/Backend";
 
 export default function Login() {
   document.title = "Login - TodoApp";
@@ -11,6 +12,7 @@ export default function Login() {
 
   const onLoginClick = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     // Validate the inputs to not be empty!
     if (!ValidateInput(userCredentials.username, { notEmpty: true })) {
@@ -20,6 +22,23 @@ export default function Login() {
       setErrorMessage("Password cannot be empty!");
       return;
     } else setErrorMessage("");
+
+    // Log the user in and then redirect to homepage!
+    Backend.login(userCredentials.username, userCredentials.password).then(
+      (res) => {
+        console.log(res.error);
+        if (res.error !== "" && res.error !== undefined) {
+          setErrorMessage(res.error);
+          console.log("returning");
+          return;
+        }
+
+        // Update the global context
+
+        // Redirect
+        window.location = res.redirect;
+      }
+    );
   };
 
   return (

@@ -15,10 +15,10 @@ exports.login = function (req, res) {
       }
 
       if (userCredentials.username !== user.username) {
-        res.json({ error: "Invalid credentials" });
+        res.json({ error: "Invalid username or password" });
         return;
       } else if (userCredentials.password !== user.password) {
-        res.json({ error: "Invalid credentials" });
+        res.json({ error: "Invalid username or password" });
         return;
       }
 
