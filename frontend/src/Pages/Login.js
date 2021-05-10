@@ -16,10 +16,10 @@ export default function Login() {
     e.preventDefault();
 
     // Validate the inputs to not be empty!
-    if (!ValidateInput(userCredentials.username, { notEmpty: true })) {
+    if (!ValidateInput(userCredentials.username)) {
       setErrorMessage("Username cannot be empty!");
       return;
-    } else if (!ValidateInput(userCredentials.password, { notEmpty: true })) {
+    } else if (!ValidateInput(userCredentials.password)) {
       setErrorMessage("Password cannot be empty!");
       return;
     } else setErrorMessage("");

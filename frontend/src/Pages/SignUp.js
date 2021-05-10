@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../Components/ErrorMessage";
+import ValidateInput from "../Utils/ValidateInput";
 
 export default function SignUp() {
   document.title = "Sign Up - TodoApp";
@@ -9,6 +10,25 @@ export default function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [conPassword, setConPassword] = useState("");
+
+  const onSignupClick = (e) => {
+    e.preventDefault();
+
+    // Varify inputs
+    if (
+      !ValidateInput(username) ||
+      !ValidateInput(password) ||
+      !ValidateInput(conPassword)
+    ) {
+      setErrorMessage("Fields cannot be empty!");
+      return;
+    } else if (password !== conPassword) {
+      setErrorMessage("Password and Confirmation Password can't be different");
+      return;
+    }
+
+    // Contact the backend
+  };
 
   return (
     <div className="form__background">
@@ -58,7 +78,7 @@ export default function SignUp() {
               Sign In
             </Link>
           </p>
-          <button className="btn" type="submit">
+          <button className="btn" type="submit" onClick={onSignupClick}>
             Sign Up
           </button>
         </form>
