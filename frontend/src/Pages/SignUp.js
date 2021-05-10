@@ -26,7 +26,7 @@ export default function SignUp() {
     } else if (password !== conPassword) {
       setErrorMessage("Password and Confirmation Password can't be different");
       return;
-    } else if (errorMessage !== "") setErrorMessage("");
+    }
 
     // Contact the backend
     BackendApi.createUser({

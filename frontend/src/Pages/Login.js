@@ -16,13 +16,13 @@ export default function Login() {
     e.preventDefault();
 
     // Validate the inputs to not be empty!
-    if (!ValidateInput(userCredentials.username)) {
-      setErrorMessage("Username cannot be empty!");
+    if (
+      !ValidateInput(userCredentials.username) ||
+      !ValidateInput(userCredentials.password)
+    ) {
+      setErrorMessage("Fields cannot be empty");
       return;
-    } else if (!ValidateInput(userCredentials.password)) {
-      setErrorMessage("Password cannot be empty!");
-      return;
-    } else setErrorMessage("");
+    }
 
     // Log the user in and then redirect to homepage!
     BackendApi.login(userCredentials).then((res) => {
