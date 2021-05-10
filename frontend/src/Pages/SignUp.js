@@ -33,6 +33,9 @@ export default function SignUp() {
       username: username,
       password: password,
     }).then((res) => {
+      // We were redirected to login screen...
+      if (res === undefined) return;
+
       if (res.error !== undefined) {
         setErrorMessage(res.error);
         return;
