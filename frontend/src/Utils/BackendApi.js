@@ -13,20 +13,23 @@ BackendApi.sendRequest = function (url, body, method = "GET") {
     .then((res) => {
       // Immediately redirect to login page if the server tells us to!
       if (res.redirect === "/login") window.location = "/login";
+      else return res;
     });
 };
 
 // Sends a login request to the backend
 // Returns a promise with the response from the backend in json format
-BackendApi.login = function (username, password) {
-  const userCredentials = { username: username, password: password };
-
+BackendApi.login = function (userCredentials) {
   return this.sendRequest("/login", userCredentials, "POST");
 };
 
 BackendApi.logout = function () {
   localStorage.clear();
   this.sendRequest("/logout");
+};
+
+BackendApi.createUser = function (userCredentials) {
+  return this.sendRequest("/user", userCredentials, "POST");
 };
 
 export default BackendApi;

@@ -1,5 +1,5 @@
 import React from "react";
-import BackendApi from "../Utils/Backend";
+import BackendApi from "../Utils/BackendApi";
 
 export default function Navbar({ username }) {
   const onLogoutClick = (e) => {

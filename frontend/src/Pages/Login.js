@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ValidateInput from "../Utils/ValidateInput";
 import ErrorMessage from "../Components/ErrorMessage";
-import BackendApi from "../Utils/Backend";
+import BackendApi from "../Utils/BackendApi";
 import { GlobalContext } from "../App";
 
 export default function Login() {
@@ -25,21 +25,19 @@ export default function Login() {
     } else setErrorMessage("");
 
     // Log the user in and then redirect to homepage!
-    BackendApi.login(userCredentials.username, userCredentials.password).then(
-      (res) => {
-        if (res.error !== "" && res.error !== undefined) {
-          setErrorMessage(res.error);
-          return;
-        }
-
-        // Update the global context
-        localStorage.setItem("username", res.username);
-        context.update(true, res.username);
-
-        // Redirect
-        window.location = "/";
+    BackendApi.login(userCredentials).then((res) => {
+      if (res.error !== "" && res.error !== undefined) {
+        setErrorMessage(res.error);
+        return;
       }
-    );
+
+      // Update the global context
+      localStorage.setItem("username", res.username);
+      context.update(true, res.username);
+
+      // Redirect
+      window.location = "/";
+    });
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../Components/ErrorMessage";
+import BackendApi from "../Utils/BackendApi";
 import ValidateInput from "../Utils/ValidateInput";
 
 export default function SignUp() {
@@ -25,9 +26,18 @@ export default function SignUp() {
     } else if (password !== conPassword) {
       setErrorMessage("Password and Confirmation Password can't be different");
       return;
-    }
+    } else if (errorMessage !== "") setErrorMessage("");
 
     // Contact the backend
+    BackendApi.createUser({
+      username: username,
+      password: password,
+    }).then((res) => {
+      if (res.error !== undefined) {
+        setErrorMessage(res.error);
+        return;
+      }
+    });
   };
 
   return (
