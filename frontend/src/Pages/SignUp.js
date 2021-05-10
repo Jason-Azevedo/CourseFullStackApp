@@ -6,6 +6,9 @@ export default function SignUp() {
   document.title = "Sign Up - TodoApp";
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [conPassword, setConPassword] = useState("");
 
   return (
     <div className="form__background">
@@ -24,6 +27,7 @@ export default function SignUp() {
             id="username-input"
             name="username"
             type="text"
+            onChange={(e) => setUsername(e.target.value)}
           />
 
           <label className="label" htmlFor="password-input">
@@ -34,6 +38,7 @@ export default function SignUp() {
             id="password-input"
             name="password"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <label className="label" htmlFor="password-input-confirm">
@@ -44,6 +49,7 @@ export default function SignUp() {
             id="password-input-confirm"
             name="password"
             type="password"
+            onChange={(e) => setConPassword(e.target.value)}
           />
 
           <p className="text">
