@@ -2,7 +2,17 @@ const TodoModel = require("../models/TodoModel");
 
 exports.getTodos = function (req, res) {
   TodoModel.getAll(req.session.user._id)
-    .then((data) => res.json(data))
+    .then((data) => {
+      const todos = data.map((todo) => {
+        return {
+          _id: todo._id,
+          title: todo.title,
+          description: todo.description,
+        };
+      });
+
+      res.json(todos);
+    })
     .catch((err) => {
       console.log("Error occured" + err);
       res.json({ error: "An error occured" });
