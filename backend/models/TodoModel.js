@@ -6,10 +6,21 @@ const TodoSchema = new mongoose.Schema({
 });
 const TodoModel = mongoose.model("todo", TodoSchema);
 
-async function createTodo(todo) {}
-async function editTodo(todo) {}
-async function getTodos(userId) {}
-async function deleteTodo(todoId) {}
+async function createTodo(todo) {
+  const todo = await new TodoModel(todo);
+  return todo.save();
+}
+
+async function editTodo(todo) {
+  return await TodoModel.updateOne({ _id: todo._id }, todo);
+}
+
+async function getTodos(userId) {
+  return await TodoModel.find({ userId: userId });
+}
+async function deleteTodo(todo) {
+  return await TodoModel.deleteOne({ userId: todo.userId, _id: todo.todoId });
+}
 
 exports.create = createTodo;
 exports.edit = editTodo;
