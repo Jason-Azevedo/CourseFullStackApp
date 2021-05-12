@@ -24,6 +24,7 @@ exports.login = function (req, res) {
 
       // User should be legit
       req.session.isLoggedIn = true;
+      req.session.user = { _id: user._id, username: user.username };
       res.json({ redirect: "/", username: user.username });
     })
     .catch(console.error);
