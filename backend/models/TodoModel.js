@@ -7,8 +7,8 @@ const TodoSchema = new mongoose.Schema({
 const TodoModel = mongoose.model("todo", TodoSchema);
 
 async function createTodo(todo) {
-  const todo = await new TodoModel(todo);
-  return todo.save();
+  const newTodo = await new TodoModel(todo);
+  return newTodo.save();
 }
 
 async function editTodo(todo) {
