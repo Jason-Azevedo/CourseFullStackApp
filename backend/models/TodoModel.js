@@ -18,6 +18,11 @@ async function editTodo(todo) {
 async function getTodos(userId) {
   return await TodoModel.find({ userId: userId });
 }
+
+async function getTodo(userId, todoId) {
+  return await TodoModel.findOne({ _id: todoId, userId: userId });
+}
+
 async function deleteTodo(todo) {
   return await TodoModel.deleteOne({ userId: todo.userId, _id: todo.todoId });
 }
@@ -25,4 +30,5 @@ async function deleteTodo(todo) {
 exports.create = createTodo;
 exports.edit = editTodo;
 exports.getAll = getTodos;
+exports.getTodo = getTodo;
 exports.delete = deleteTodo;

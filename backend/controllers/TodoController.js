@@ -45,5 +45,41 @@ exports.createTodo = function (req, res) {
     .catch(() => res.json({ error: "An error occured" }));
 };
 
-exports.editTodo = function (req, res) {};
+exports.editTodo = function (req, res) {
+  const todo = {
+    _id: req.body._id,
+    title: req.body.title,
+    description: req.body.description,
+    userId: req.session.user._id,
+  };
+
+  // Validation
+  let isError = false;
+  if (todo.title === "" || todo.title === undefined) isError = true;
+  else if (todo.description === "" || todo.description === undefined)
+    isError = true;
+  else if (todo._id === "" || todo._id === undefined) isError = true;
+
+  if (isError) {
+    res.json({ error: "Missing values in request" });
+    return;
+  }
+
+  // Edit
+  TodoModel.edit(todo)
+    .then(() => {
+      TodoModel.getTodo(todo.userId, todo._id).then((data) => {
+        const editedTodo = {
+          _id: data._id,
+          title: data.title,
+          description: data.description,
+          userId: data.userId,
+        };
+
+        res.json(editedTodo);
+      });
+    })
+    .catch((err) => res.json({ error: "An error occured" }));
+};
+
 exports.deleteTodo = function (req, res) {};
