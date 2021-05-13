@@ -26,6 +26,7 @@ exports.createTodo = function (req, res) {
     description: req.body.description,
   };
 
+  // Validate
   if (newTodo.title === undefined || newTodo.title === "") {
     res.json({ error: "Title of todo is empty" });
     return;
@@ -34,6 +35,7 @@ exports.createTodo = function (req, res) {
     return;
   }
 
+  // Create
   TodoModel.create(newTodo)
     .then((todo) => {
       res.json({
@@ -82,4 +84,25 @@ exports.editTodo = function (req, res) {
     .catch((err) => res.json({ error: "An error occured" }));
 };
 
-exports.deleteTodo = function (req, res) {};
+exports.deleteTodo = function (req, res) {
+  const todo = {
+    _id: req.body._id,
+    userId: req.session.user._id,
+  };
+
+  console.log(todo);
+
+  // Validate
+  if (todo._id === "" || todo._id === undefined) {
+    res.json({ error: "Missing values in request" });
+    return;
+  }
+
+  // Delete
+  TodoModel.delete(todo)
+    .then((data) => res.json({ status: "ok" }))
+    .catch((err) => {
+      res.json({ error: "An error occured" });
+      console.log(err);
+    });
+};
