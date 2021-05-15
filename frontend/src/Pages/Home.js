@@ -6,19 +6,13 @@ import EditTodoDialog from "../Components/TodoDialog/EditTodoDialog";
 import TodoManager from "../Components/TodoManager";
 import BackendApi from "../Utils/BackendApi";
 
-const testTodoData = [
-  {
-    _id: 0,
-    title: "Test Note",
-    description: "This is the description of the test note",
-  },
-];
-
 export default function Home() {
   const { context } = useContext(GlobalContext);
   document.title = `${context.username}'s Todos - Course Todo App`;
 
   const [todos, setTodos] = useState([]);
+
+  // Helper method to get our todos
   const FetchTodos = () => {
     BackendApi.getTodos().then((todos) => {
       if (todos.error) {
@@ -30,10 +24,12 @@ export default function Home() {
     });
   };
 
+  // Fetch todos when the page is first done loading!
   useEffect(() => {
     BackendApi.getTodos().then((todos) => FetchTodos());
   }, []);
 
+  // Different callback methods for each case, example: create todo
   const createTodo = (todo) =>
     BackendApi.createTodo(todo).then((data) => {
       if (data.error) {
@@ -43,15 +39,16 @@ export default function Home() {
 
       FetchTodos();
     });
-  const editTodo = (todo) => {
-    const tempArr = todos.map((oldTodo) => {
-      if (oldTodo._id !== todo.id) return oldTodo;
-      else if (oldTodo._id === todo.id) {
-        return todo;
-      }
-    });
 
-    setTodos(tempArr);
+  const editTodo = (todo) => {
+    BackendApi.editTodo(todo).then((data) => {
+      if (data.error) {
+        console.error(data.error);
+        return;
+      }
+
+      FetchTodos();
+    });
   };
 
   const deleteTodo = (todo) => {

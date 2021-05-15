@@ -18,7 +18,7 @@ export default function TodoDialog({
       return;
     }
 
-    onComplete({ id: todo.id, title: todoTitle, description: todoDesc });
+    onComplete({ _id: todo._id, title: todoTitle, description: todoDesc });
     clearState();
   };
 

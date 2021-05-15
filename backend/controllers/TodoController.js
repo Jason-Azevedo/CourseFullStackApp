@@ -63,6 +63,7 @@ exports.editTodo = function (req, res) {
   else if (todo._id === "" || todo._id === undefined) isError = true;
 
   if (isError) {
+    console.log(todo);
     res.json({ error: "Missing values in request" });
     return;
   }
