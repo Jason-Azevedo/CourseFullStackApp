@@ -32,6 +32,10 @@ export default function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    console.log(todos);
+  }, [todos]);
+
   // In these methods make calls to the server api for the todo crud operations
   // then refresh the todos from the server.
   const createTodo = (todo) =>
@@ -49,15 +53,24 @@ export default function Home() {
 
     setTodos(tempArr);
   };
-  const deleteTodo = (todo) => {
-    const tempArr = [];
-    todos.forEach((oldTodo) => {
-      if (oldTodo._id !== todo.id) {
-        tempArr.push(oldTodo);
-      }
-    });
 
-    setTodos(tempArr);
+  const deleteTodo = (todo) => {
+    BackendApi.deleteTodo(todo).then((todo) => {
+      if (todo.error) {
+        console.error(todo.error);
+        return;
+      }
+
+      // Fetch the updated todos
+      BackendApi.getTodos().then((todos) => {
+        if (todos.error) {
+          console.error(todos.error);
+          return;
+        }
+
+        setTodos(todos);
+      });
+    });
   };
 
   // Dialog related state

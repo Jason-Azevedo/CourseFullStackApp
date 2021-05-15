@@ -24,7 +24,7 @@ async function getTodo(userId, todoId) {
 }
 
 async function deleteTodo(todo) {
-  return await TodoModel.deleteOne({ userId: todo.userId, _id: todo.todoId });
+  return await TodoModel.deleteOne({ userId: todo.userId, _id: todo._id });
 }
 
 exports.create = createTodo;
