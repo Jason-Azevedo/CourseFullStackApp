@@ -19,8 +19,7 @@ export default function Home() {
   document.title = `${context.username}'s Todos - Course Todo App`;
 
   const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
+  const FetchTodos = () => {
     BackendApi.getTodos().then((todos) => {
       if (todos.error) {
         console.error(todos.error);
@@ -29,10 +28,12 @@ export default function Home() {
 
       setTodos(todos);
     });
+  };
+
+  useEffect(() => {
+    BackendApi.getTodos().then((todos) => FetchTodos());
   }, []);
 
-  // In these methods make calls to the server api for the todo crud operations
-  // then refresh the todos from the server.
   const createTodo = (todo) =>
     BackendApi.createTodo(todo).then((data) => {
       if (data.error) {
@@ -40,14 +41,7 @@ export default function Home() {
         return;
       }
 
-      BackendApi.getTodos().then((todos) => {
-        if (todos.error) {
-          console.error(todos.error);
-          return;
-        }
-
-        setTodos(todos);
-      });
+      FetchTodos();
     });
   const editTodo = (todo) => {
     const tempArr = todos.map((oldTodo) => {
@@ -68,14 +62,7 @@ export default function Home() {
       }
 
       // Fetch the updated todos
-      BackendApi.getTodos().then((todos) => {
-        if (todos.error) {
-          console.error(todos.error);
-          return;
-        }
-
-        setTodos(todos);
-      });
+      FetchTodos();
     });
   };
 
