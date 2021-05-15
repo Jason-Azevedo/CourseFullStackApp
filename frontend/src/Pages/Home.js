@@ -1,13 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../App";
 import Navbar from "../Components/Navbar";
 import CreateTodoDialog from "../Components/TodoDialog/CreateTodoDialog";
 import EditTodoDialog from "../Components/TodoDialog/EditTodoDialog";
 import TodoManager from "../Components/TodoManager";
+import BackendApi from "../Utils/BackendApi";
 
 const testTodoData = [
   {
-    id: 0,
+    _id: 0,
     title: "Test Note",
     description: "This is the description of the test note",
   },
@@ -17,7 +18,20 @@ export default function Home() {
   const { context } = useContext(GlobalContext);
   document.title = `${context.username}'s Todos - Course Todo App`;
 
-  const [todos, setTodos] = useState(testTodoData);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    BackendApi.getTodos().then((todos) => {
+      if (todos.error) {
+        console.error(todos.error);
+        return;
+      }
+
+      setTodos(todos);
+      console.log("Got todos!");
+    });
+  }, []);
+
   // In these methods make calls to the server api for the todo crud operations
   // then refresh the todos from the server.
   const createTodo = (todo) =>
@@ -27,8 +41,8 @@ export default function Home() {
     });
   const editTodo = (todo) => {
     const tempArr = todos.map((oldTodo) => {
-      if (oldTodo.id !== todo.id) return oldTodo;
-      else if (oldTodo.id === todo.id) {
+      if (oldTodo._id !== todo.id) return oldTodo;
+      else if (oldTodo._id === todo.id) {
         return todo;
       }
     });
@@ -38,7 +52,7 @@ export default function Home() {
   const deleteTodo = (todo) => {
     const tempArr = [];
     todos.forEach((oldTodo) => {
-      if (oldTodo.id !== todo.id) {
+      if (oldTodo._id !== todo.id) {
         tempArr.push(oldTodo);
       }
     });
