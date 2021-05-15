@@ -28,20 +28,26 @@ export default function Home() {
       }
 
       setTodos(todos);
-      console.log("Got todos!");
     });
   }, []);
-
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
 
   // In these methods make calls to the server api for the todo crud operations
   // then refresh the todos from the server.
   const createTodo = (todo) =>
-    setTodos((prev) => {
-      todo.id = prev.length;
-      return [...prev, todo];
+    BackendApi.createTodo(todo).then((data) => {
+      if (data.error) {
+        console.error(data.error);
+        return;
+      }
+
+      BackendApi.getTodos().then((todos) => {
+        if (todos.error) {
+          console.error(todos.error);
+          return;
+        }
+
+        setTodos(todos);
+      });
     });
   const editTodo = (todo) => {
     const tempArr = todos.map((oldTodo) => {
