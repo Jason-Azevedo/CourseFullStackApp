@@ -5,9 +5,8 @@ import Settings from "./Pages/Settings";
 import SecureRoute from "./Components/SecureRoute";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { UserContext } from "./Context/UserContext";
 import "./Styles/main.scss";
-
-export const GlobalContext = React.createContext();
 
 function App() {
   const [context, setContext] = useState({
@@ -33,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ context: context, update: updateContext }}>
+    <UserContext.Provider value={{ context: context, update: updateContext }}>
       <Router>
         <Switch>
           <SecureRoute path="/" exact={true}>
@@ -51,7 +50,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </GlobalContext.Provider>
+    </UserContext.Provider>
   );
 }
 

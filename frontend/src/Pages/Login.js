@@ -3,14 +3,14 @@ import { Link, Redirect } from "react-router-dom";
 import ValidateInput from "../Utils/ValidateInput";
 import ErrorMessage from "../Components/ErrorMessage";
 import BackendApi from "../Utils/BackendApi";
-import { GlobalContext } from "../App";
+import { UserContext } from "../Context/UserContext";
 
 export default function Login() {
   document.title = "Login - TodoApp";
 
   const [userCredentials, setUserCredentials] = useState({});
   const [errorMessage, setErrorMessage] = useState();
-  const context = useContext(GlobalContext);
+  const context = useContext(UserContext);
 
   const onLoginClick = (e) => {
     e.preventDefault();

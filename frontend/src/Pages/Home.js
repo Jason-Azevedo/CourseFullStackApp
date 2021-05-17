@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { GlobalContext } from "../App";
+import { UserContext } from "../Context/UserContext";
 import Navbar from "../Components/Navbar";
 import CreateTodoDialog from "../Components/TodoDialog/CreateTodoDialog";
 import EditTodoDialog from "../Components/TodoDialog/EditTodoDialog";
@@ -7,7 +7,7 @@ import TodoManager from "../Components/TodoManager";
 import BackendApi from "../Utils/BackendApi";
 
 export default function Home() {
-  const { context } = useContext(GlobalContext);
+  const { context } = useContext(UserContext);
   document.title = `${context.username}'s Todos - Course Todo App`;
 
   const [todos, setTodos] = useState([]);
