@@ -4,6 +4,7 @@ import ValidateInput from "../Utils/ValidateInput";
 import ErrorMessage from "../Components/ErrorMessage";
 import BackendApi from "../Utils/BackendApi";
 import { UserContext } from "../Context/UserContext";
+import { BrowserRouter } from "react-router";
 
 export default function Login() {
   document.title = "Login - TodoApp";
@@ -25,19 +26,18 @@ export default function Login() {
     }
 
     // Log the user in and then redirect to homepage!
-    BackendApi.login(userCredentials).then((res) => {
-      if (res.error !== "" && res.error !== undefined) {
-        setErrorMessage(res.error);
-        return;
-      }
+    BackendApi.login(
+      userCredentials,
+      (res) => {
+        // Update the global context
+        localStorage.setItem("username", res.username);
+        context.update(true, res.username);
 
-      // Update the global context
-      localStorage.setItem("username", res.username);
-      context.update(true, res.username);
-
-      // Redirect
-      window.location = "/";
-    });
+        // Redirect
+        window.location = "/";
+      },
+      setErrorMessage
+    );
   };
 
   return (

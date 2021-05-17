@@ -29,18 +29,13 @@ export default function SignUp() {
     }
 
     // Contact the backend
-    BackendApi.createUser({
+    const userCredentials = {
       username: username,
       password: password,
-    }).then((res) => {
-      // We were redirected to login screen...
-      if (res === undefined) return;
+    };
 
-      if (res.error !== undefined) {
-        setErrorMessage(res.error);
-        return;
-      }
-    });
+    // Do nothing in onSuccess callback, because it will auto redirect to login
+    BackendApi.createUser(userCredentials, () => {}, setErrorMessage);
   };
 
   return (

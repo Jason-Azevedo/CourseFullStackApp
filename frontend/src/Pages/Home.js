@@ -25,9 +25,7 @@ export default function Home() {
   };
 
   // Fetch todos when the page is first done loading!
-  useEffect(() => {
-    BackendApi.getTodos().then((todos) => FetchTodos());
-  }, []);
+  useEffect(() => FetchTodos, []);
 
   // Different callback methods for each case, example: create todo
   const createTodo = (todo) =>
