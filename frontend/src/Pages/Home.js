@@ -14,18 +14,11 @@ export default function Home() {
 
   // Helper method to get our todos
   const FetchTodos = () => {
-    BackendApi.getTodos().then((todos) => {
-      if (todos.error) {
-        console.error(todos.error);
-        return;
-      }
-
-      setTodos(todos);
-    });
+    BackendApi.getTodos(setTodos, console.error);
   };
 
   // Fetch todos when the page is first done loading!
-  useEffect(() => FetchTodos, []);
+  useEffect(FetchTodos, []);
 
   // Different callback methods for each case, example: create todo
   const createTodo = (todo) =>

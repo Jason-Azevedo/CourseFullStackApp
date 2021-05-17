@@ -16,6 +16,8 @@ BackendApi.sendRequest = function (options, onSuccess, onFail) {
   fetch(options.url, fetchOptions)
     .then((data) => data.json())
     .then((res) => {
+      console.log(res);
+
       // Immediately redirect to login page if the server tells us to!
       if (res.redirect === "/login") window.location = "/login";
       else if (res.error) onFail(res.error);
@@ -51,20 +53,43 @@ BackendApi.createUser = function (userCredentials, onSuccess, onFail) {
   this.sendRequest(requestOptions, onSuccess, onFail);
 };
 
-BackendApi.createTodo = function (todo) {
-  return this.sendRequest("/todo", todo, "POST");
+BackendApi.createTodo = function (todo, onSuccess, onFail) {
+  const requestOptions = {
+    url: "/todo",
+    method: "POST",
+    body: todo,
+  };
+
+  this.sendRequest(requestOptions, onSuccess, onFail);
 };
 
-BackendApi.editTodo = function (todo) {
-  return this.sendRequest("/todo", todo, "PATCH");
+BackendApi.editTodo = function (todo, onSuccess, onFail) {
+  const requestOptions = {
+    url: "/todo",
+    method: "PATCH",
+    body: todo,
+  };
+
+  this.sendRequest(requestOptions, onSuccess, onFail);
 };
 
-BackendApi.getTodos = function () {
-  return this.sendRequest("/todo", {}, "GET");
+BackendApi.getTodos = function (onSuccess, onFail) {
+  const requestOptions = {
+    url: "/todo",
+    method: "GET",
+  };
+
+  this.sendRequest(requestOptions, onSuccess, onFail);
 };
 
-BackendApi.deleteTodo = function (todo) {
-  return this.sendRequest("/todo", todo, "DELETE");
+BackendApi.deleteTodo = function (todo, onSuccess, onFail) {
+  const requestOptions = {
+    url: "/todo",
+    method: "DELETE",
+    body: todo,
+  };
+
+  this.sendRequest(requestOptions, onSuccess, onFail);
 };
 
 export default BackendApi;
