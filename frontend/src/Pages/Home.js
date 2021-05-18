@@ -21,37 +21,16 @@ export default function Home() {
   useEffect(FetchTodos, []);
 
   // Different callback methods for each case, example: create todo
-  const createTodo = (todo) =>
-    BackendApi.createTodo(todo).then((data) => {
-      if (data.error) {
-        console.error(data.error);
-        return;
-      }
-
-      FetchTodos();
-    });
+  const createTodo = (todo) => {
+    BackendApi.createTodo(todo, FetchTodos, console.error);
+  };
 
   const editTodo = (todo) => {
-    BackendApi.editTodo(todo).then((data) => {
-      if (data.error) {
-        console.error(data.error);
-        return;
-      }
-
-      FetchTodos();
-    });
+    BackendApi.editTodo(todo, FetchTodos, console.error);
   };
 
   const deleteTodo = (todo) => {
-    BackendApi.deleteTodo(todo).then((todo) => {
-      if (todo.error) {
-        console.error(todo.error);
-        return;
-      }
-
-      // Fetch the updated todos
-      FetchTodos();
-    });
+    BackendApi.deleteTodo(todo, FetchTodos, console.error);
   };
 
   // Dialog related state
