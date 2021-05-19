@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
 export default function TodoDialog({
-  title,
-  subtitle,
-  buttonText,
+  isEditMode,
   todo = { id: 0, title: "", description: "" },
   onComplete,
   onCancel,
@@ -35,8 +33,12 @@ export default function TodoDialog({
   return (
     <div className={`todo-dialog--overlay `}>
       <div className="todo-dialog">
-        <h2 className="title--md">{title}</h2>
-        <p className="text">{subtitle}</p>
+        <h2 className="title--md">
+          {isEditMode ? "Edit Todo" : "Create Todo"}
+        </h2>
+        <p className="text">
+          {isEditMode ? "Please edit your todo" : "Please create your todo"}
+        </p>
 
         <label className="label" htmlFor="">
           Title {requiredText}
@@ -65,7 +67,7 @@ export default function TodoDialog({
             Cancel
           </button>
           <button className="btn" onClick={onCreateClick}>
-            {buttonText}
+            {isEditMode ? "Edit" : "Create"}
           </button>
         </div>
       </div>
