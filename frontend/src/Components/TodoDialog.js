@@ -17,17 +17,10 @@ export default function TodoDialog({
     }
 
     onComplete({ _id: todo._id, title: todoTitle, description: todoDesc });
-    clearState();
   };
 
   const onCancelClick = () => {
-    clearState();
     onCancel();
-  };
-
-  const clearState = () => {
-    setTodoTitle("");
-    setTodoDesc("");
   };
 
   return (
