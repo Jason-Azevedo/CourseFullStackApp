@@ -19,10 +19,6 @@ export default function TodoDialog({
     onComplete({ _id: todo._id, title: todoTitle, description: todoDesc });
   };
 
-  const onCancelClick = () => {
-    onCancel();
-  };
-
   return (
     <div className={`todo-dialog--overlay `}>
       <div className="todo-dialog">
@@ -56,7 +52,7 @@ export default function TodoDialog({
         ></textarea>
 
         <div>
-          <button className="btn" onClick={onCancelClick}>
+          <button className="btn" onClick={onCancel}>
             Cancel
           </button>
           <button className="btn" onClick={onCreateClick}>
