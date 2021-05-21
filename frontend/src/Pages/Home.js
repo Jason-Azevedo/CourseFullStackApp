@@ -19,19 +19,6 @@ export default function Home() {
   // Fetch todos when the page is first done loading!
   useEffect(FetchTodos, []);
 
-  // Different callback methods for each case, example: create todo
-  const createTodo = (todo) => {
-    BackendApi.createTodo(todo, FetchTodos, console.error);
-  };
-
-  const editTodo = (todo) => {
-    BackendApi.editTodo(todo, FetchTodos, console.error);
-  };
-
-  const deleteTodo = (todo) => {
-    BackendApi.deleteTodo(todo, FetchTodos, console.error);
-  };
-
   // Dialog related state
   const [dialogOptions, setDialogOptions] = useState({
     isEdit: false,
@@ -47,8 +34,11 @@ export default function Home() {
     });
 
   const onTodoDialogCompleteClick = (todo) => {
-    if (dialogOptions.isEdit) editTodo(todo);
-    else createTodo(todo);
+    if (dialogOptions.isEdit) {
+      BackendApi.editTodo(todo, FetchTodos, console.error);
+    } else {
+      BackendApi.createTodo(todo, FetchTodos, console.error);
+    }
 
     toggleDialog();
   };
@@ -73,7 +63,9 @@ export default function Home() {
           <TodoManager
             todoArr={todos}
             onEdit={(todo) => toggleDialog(true, todo)}
-            onDelete={deleteTodo}
+            onDelete={(todo) =>
+              BackendApi.deleteTodo(todo, FetchTodos, console.error)
+            }
           />
         </div>
 
