@@ -25,7 +25,7 @@ export default function Home() {
     showing: false,
   });
   const toggleDialog = (editMode = false, todo) =>
-    setDialogOptions((prev) => {
+    setDialogOptions(prev => {
       return {
         isEdit: editMode,
         showing: !prev.showing,
@@ -33,7 +33,7 @@ export default function Home() {
       };
     });
 
-  const onTodoDialogCompleteClick = (todo) => {
+  const onTodoDialogCompleteClick = todo => {
     if (dialogOptions.isEdit) {
       BackendApi.editTodo(todo, FetchTodos, console.error);
     } else {
@@ -42,15 +42,6 @@ export default function Home() {
 
     toggleDialog();
   };
-
-  const tododialog = (
-    <TodoDialog
-      isEditMode={dialogOptions.isEdit}
-      todo={dialogOptions.todo}
-      onComplete={onTodoDialogCompleteClick}
-      onCancel={toggleDialog}
-    />
-  );
 
   return (
     <>
@@ -62,8 +53,8 @@ export default function Home() {
         <div className="container small">
           <TodoManager
             todoArr={todos}
-            onEdit={(todo) => toggleDialog(true, todo)}
-            onDelete={(todo) =>
+            onEdit={todo => toggleDialog(true, todo)}
+            onDelete={todo =>
               BackendApi.deleteTodo(todo, FetchTodos, console.error)
             }
           />
@@ -74,7 +65,15 @@ export default function Home() {
         </div>
       </main>
 
-      {dialogOptions.showing ? tododialog : <></>}
+      {/* Render dialog when it should be showing */}
+      {dialogOptions.showing && 
+         <TodoDialog
+          isEditMode={dialogOptions.isEdit}
+          todo={dialogOptions.todo}
+          onComplete={onTodoDialogCompleteClick}
+          onCancel={toggleDialog}
+         />
+      }
     </>
   );
 }
