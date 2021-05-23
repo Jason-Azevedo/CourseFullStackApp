@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
-import ValidateInput from "../Utils/ValidateInput";
 import ErrorMessage from "../Components/ErrorMessage";
 import BackendApi from "../Utils/BackendApi";
 import { UserContext } from "../Context/UserContext";
@@ -9,18 +8,17 @@ import { BrowserRouter } from "react-router";
 export default function Login() {
   document.title = "Login - TodoApp";
 
-  const [userCredentials, setUserCredentials] = useState({});
+  const [userCredentials, setUserCredentials] = useState({
+    username: "",
+    password: "",
+  });
   const [errorMessage, setErrorMessage] = useState();
   const context = useContext(UserContext);
 
-  const onLoginClick = (e) => {
+  const onLoginClick = e => {
     e.preventDefault();
 
-    // Validate the inputs to not be empty!
-    if (
-      !ValidateInput(userCredentials.username) ||
-      !ValidateInput(userCredentials.password)
-    ) {
+    if (userCredentials.username === "" || userCredentials.password === "") {
       setErrorMessage("Fields cannot be empty");
       return;
     }
@@ -28,7 +26,7 @@ export default function Login() {
     // Log the user in and then redirect to homepage!
     BackendApi.login(
       userCredentials,
-      (res) => {
+      res => {
         // Update the global context
         localStorage.setItem("username", res.username);
         context.update(true, res.username);
@@ -57,8 +55,8 @@ export default function Login() {
             id="username-input"
             name="username"
             type="text"
-            onChange={(e) =>
-              setUserCredentials((prev) => {
+            onChange={e =>
+              setUserCredentials(prev => {
                 prev.username = e.target.value;
                 return prev;
               })
@@ -73,8 +71,8 @@ export default function Login() {
             id="password-input"
             name="password"
             type="password"
-            onChange={(e) =>
-              setUserCredentials((prev) => {
+            onChange={e =>
+              setUserCredentials(prev => {
                 prev.password = e.target.value;
                 return prev;
               })

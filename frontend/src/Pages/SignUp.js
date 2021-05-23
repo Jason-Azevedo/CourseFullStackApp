@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../Components/ErrorMessage";
 import BackendApi from "../Utils/BackendApi";
-import ValidateInput from "../Utils/ValidateInput";
 
 export default function SignUp() {
   document.title = "Sign Up - TodoApp";
@@ -12,15 +11,11 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [conPassword, setConPassword] = useState("");
 
-  const onSignupClick = (e) => {
+  const onSignupClick = e => {
     e.preventDefault();
 
     // Varify inputs
-    if (
-      !ValidateInput(username) ||
-      !ValidateInput(password) ||
-      !ValidateInput(conPassword)
-    ) {
+    if (username === "" || password === "" || conPassword === "") {
       setErrorMessage("Fields cannot be empty!");
       return;
     } else if (password !== conPassword) {
@@ -55,7 +50,7 @@ export default function SignUp() {
             id="username-input"
             name="username"
             type="text"
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={e => setUsername(e.target.value)}
           />
 
           <label className="label" htmlFor="password-input">
@@ -66,7 +61,7 @@ export default function SignUp() {
             id="password-input"
             name="password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
 
           <label className="label" htmlFor="password-input-confirm">
@@ -77,7 +72,7 @@ export default function SignUp() {
             id="password-input-confirm"
             name="password"
             type="password"
-            onChange={(e) => setConPassword(e.target.value)}
+            onChange={e => setConPassword(e.target.value)}
           />
 
           <p className="text">
