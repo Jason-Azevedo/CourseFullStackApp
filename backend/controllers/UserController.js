@@ -8,7 +8,7 @@ exports.login = function (req, res) {
   };
 
   UserModel.find(userCredentials.username)
-    .then((user) => {
+    .then(user => {
       if (user === null) {
         res.json({ error: "User doesn't exist" });
         return;
@@ -36,15 +36,18 @@ exports.logout = function (req, res) {
 };
 
 exports.createUser = function (req, res) {
-  if (req.body.username === "" || req.body.username === undefined)
+  if (req.body.username === "" || req.body.username === undefined) {
     res.json({ error: "Username cannot be empty" });
-  else if (req.body.password === "" || req.body.password === undefined)
+    return;
+  } else if (req.body.password === "" || req.body.password === undefined) {
     res.json({ error: "Password cannot be empty" });
+    return;
+  }
 
   const newUser = { username: req.body.username, password: req.body.password };
   UserModel.create(newUser)
     .then(() => res.json({ redirect: "/login" }))
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
 
       if (err.code === 11000) {
@@ -55,8 +58,25 @@ exports.createUser = function (req, res) {
       }
     });
 };
+
 exports.editUser = function (req, res) {
-  res.json({ error: "Still in development!" });
+  // Validate
+  if (req.body.username === "" || req.body.username === undefined) {
+    req.json({ error: "Cannot have empty fields" });
+    return;
+  } else if (req.body.password === "" || req.body.password === undefined) {
+    req.json({ error: "Cannot have empty fields" });
+    return;
+  }
+
+  // Edit the user
+  const user = {
+    _id: req.body._id,
+    username: req.body.username,
+    password: req.body.password,
+  };
+  // Finish me!
+  UserModel.edit(user).then();
 };
 exports.deleteUser = function (req, res) {
   res.json({ error: "Still in development!" });
