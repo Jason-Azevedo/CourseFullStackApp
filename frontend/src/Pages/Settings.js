@@ -38,9 +38,13 @@ export default function Settings() {
   const onAccountDelete = () => {
     if (!deleteAccount) {
       setErrorMessages({ deleteAccount: "Please tick the checkbox" });
+      return;
     }
 
     // Delete the users account!
+    BackendApi.deleteUser(err => {
+      setErrorMessages({ deleteAccount: err });
+    });
   };
 
   return (

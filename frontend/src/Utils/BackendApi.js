@@ -61,6 +61,17 @@ BackendApi.editUser = function (userCredentials, onSuccess, onFail) {
   this.sendRequest(requestOptions, onSuccess, onFail);
 };
 
+BackendApi.deleteUser = function (onFail) {
+  const requestOptions = {
+    url: "/user",
+    method: "DELETE",
+    body: {},
+  };
+
+  // Do nothing for the onSuccess, because we are expecting default redirect behavior
+  this.sendRequest(requestOptions, () => {}, onFail);
+};
+
 BackendApi.sendTodoRequest = function (todo, method, onSuccess, onFail) {
   const requestOptions = {
     url: "/todo",
