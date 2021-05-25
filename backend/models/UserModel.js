@@ -21,8 +21,8 @@ async function editUser(user) {
 async function getUser(username) {
   return await UserModel.findOne({ username: username });
 }
-async function deleteUser(username) {
-  return await UserModel.remove({ username: username });
+async function deleteUser(_id) {
+  return await UserModel.remove({ _id: _id });
 }
 
 exports.create = createUser;

@@ -89,6 +89,16 @@ exports.editUser = function (req, res) {
       res.json({ error: "An error occured" });
     });
 };
+
 exports.deleteUser = function (req, res) {
-  res.json({ error: "Still in development!" });
+  const _id = req.session.user._id;
+
+  UserModel.delete(_id)
+    .then(() => {
+      res.send({ redirect: "/login" });
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({ error: "An error occured" });
+    });
 };
