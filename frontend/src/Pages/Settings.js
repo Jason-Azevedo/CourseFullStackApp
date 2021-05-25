@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../Context/UserContext";
+import BackendApi from "../Utils/BackendApi";
 
 export default function Settings() {
-  const { context } = useContext(UserContext);
+  const { context, update: setContext } = useContext(UserContext);
   document.title = `${context.username}'s Settings - Course Todo App`;
 
   // Error state
@@ -18,6 +19,18 @@ export default function Settings() {
       setErrorMessages({ details: "Cannot have empty fields" });
     }
     // Save user settings!
+    BackendApi.editUser(
+      details,
+      res => {
+        const { username } = res;
+
+        localStorage.setItem("username", username);
+        setContext(true, res.username);
+      },
+      err => {
+        setErrorMessages({ details: "An error occured" });
+      }
+    );
   };
 
   // Account delete section state and callback
@@ -44,7 +57,7 @@ export default function Settings() {
         </div>
 
         <div className="setting-block">
-          <h2 className="title--xsm">{context.username}'s Details</h2>
+          <h2 className="title--xsm">Edit details</h2>
           <p className="text">Down below is your personal details</p>
           <p className="text--error">{errorMessages.details}</p>
 

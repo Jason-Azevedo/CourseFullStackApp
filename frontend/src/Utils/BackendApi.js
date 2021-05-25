@@ -14,8 +14,8 @@ BackendApi.sendRequest = function (options, onSuccess, onFail) {
   };
 
   fetch(options.url, fetchOptions)
-    .then((data) => data.json())
-    .then((res) => {
+    .then(data => data.json())
+    .then(res => {
       // Immediately redirect to login page if the server tells us to!
       if (res.redirect === "/login") window.location = "/login";
       else if (res.error) onFail(res.error);
@@ -45,6 +45,16 @@ BackendApi.createUser = function (userCredentials, onSuccess, onFail) {
   const requestOptions = {
     url: "/user",
     method: "POST",
+    body: userCredentials,
+  };
+
+  this.sendRequest(requestOptions, onSuccess, onFail);
+};
+
+BackendApi.editUser = function (userCredentials, onSuccess, onFail) {
+  const requestOptions = {
+    url: "/user",
+    method: "PATCH",
     body: userCredentials,
   };
 
