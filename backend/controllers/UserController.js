@@ -71,12 +71,23 @@ exports.editUser = function (req, res) {
 
   // Edit the user
   const user = {
-    _id: req.body._id,
+    _id: req.session.user._id,
     username: req.body.username,
     password: req.body.password,
   };
+
   // Finish me!
-  UserModel.edit(user).then();
+  UserModel.edit(user)
+    .then(() => {
+      // Update our session with the new user:
+      req.session.user.username = user.username;
+
+      res.json({ username: user.username });
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({ error: "An error occured" });
+    });
 };
 exports.deleteUser = function (req, res) {
   res.json({ error: "Still in development!" });
