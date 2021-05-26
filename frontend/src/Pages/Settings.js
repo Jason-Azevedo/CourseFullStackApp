@@ -13,15 +13,14 @@ export default function Settings() {
     deleteAccount: "",
   });
 
-  // Details state and save button callback:
+  // User details state and save button callback:
   const [details, setDetails] = useState({ username: "", password: "" });
   const onSave = () => {
-    // Check if fields are empty
+    // Check if username and password fields are empty
     if (details.username === "" || details.password === "") {
       setErrorMessages({ details: "Cannot have empty fields" });
     }
 
-    // Save user settings!
     BackendApi.editUser(
       details,
       res => {
@@ -42,7 +41,6 @@ export default function Settings() {
       return;
     }
 
-    // Delete the users account!
     BackendApi.deleteUser(err => {
       setErrorMessages({ deleteAccount: err });
     });

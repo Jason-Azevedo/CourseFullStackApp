@@ -14,11 +14,13 @@ export default function SignUp() {
   const onSignupClick = e => {
     e.preventDefault();
 
-    // Varify inputs
+    // Check if any of the fields is empty
     if (username === "" || password === "" || conPassword === "") {
       setErrorMessage("Fields cannot be empty!");
       return;
-    } else if (password !== conPassword) {
+    }
+    // Check if the confirmation password and the normal password match
+    else if (password !== conPassword) {
       setErrorMessage("Password and Confirmation Password can't be different");
       return;
     }

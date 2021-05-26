@@ -17,12 +17,12 @@ export default function Login() {
   const onLoginClick = e => {
     e.preventDefault();
 
+    // Check if the input fields are empty
     if (userCredentials.username === "" || userCredentials.password === "") {
       setErrorMessage("Fields cannot be empty");
       return;
     }
 
-    // Log the user in and then redirect to homepage!
     BackendApi.login(
       userCredentials,
       res => {
