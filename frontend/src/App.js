@@ -9,30 +9,22 @@ import { UserContext } from "./Context/UserContext";
 import "./Styles/main.scss";
 
 function App() {
-  const [context, setContext] = useState({
-    isLoggedIn: false,
-    username: "",
-  });
-
-  // Simple method for updating context, keeping code simple..
-  const updateContext = (isLoggedIn, username) => {
-    setContext({
-      isLoggedIn: isLoggedIn,
-      username: username,
-    });
-  };
+  // The username of the current logged in user
+  const [userContext, setUserContext] = useState("");
+  const updateContext = username => setUserContext(username);
 
   useEffect(() => {
     // Check if the user is logged in
-    // If they were, update the global values!
     const username = localStorage.getItem("username");
     if (username !== null) {
-      updateContext(true, username);
+      updateContext(username);
     }
   }, []);
 
   return (
-    <UserContext.Provider value={{ context: context, update: updateContext }}>
+    <UserContext.Provider
+      value={{ username: userContext, updateUsername: updateContext }}
+    >
       <Router>
         <Switch>
           <SecureRoute path="/" exact={true}>

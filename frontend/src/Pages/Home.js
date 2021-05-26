@@ -6,8 +6,8 @@ import BackendApi from "../Utils/BackendApi";
 import TodoDialog from "../Components/TodoDialog";
 
 export default function Home() {
-  const { context } = useContext(UserContext);
-  document.title = `${context.username}'s Todos - Course Todo App`;
+  const { username } = useContext(UserContext);
+  document.title = `${username.username}'s Todos - Course Todo App`;
 
   const [todos, setTodos] = useState([]);
 
@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <>
       <header>
-        <Navbar username={context.username} />
+        <Navbar username={username} />
       </header>
 
       <main className="container home">
@@ -66,14 +66,14 @@ export default function Home() {
       </main>
 
       {/* Render dialog when it should be showing */}
-      {dialogOptions.showing && 
-         <TodoDialog
+      {dialogOptions.showing && (
+        <TodoDialog
           isEditMode={dialogOptions.isEdit}
           todo={dialogOptions.todo}
           onComplete={onTodoDialogCompleteClick}
           onCancel={toggleDialog}
-         />
-      }
+        />
+      )}
     </>
   );
 }

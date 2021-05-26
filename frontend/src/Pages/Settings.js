@@ -3,8 +3,8 @@ import { UserContext } from "../Context/UserContext";
 import BackendApi from "../Utils/BackendApi";
 
 export default function Settings() {
-  const { context, update: setContext } = useContext(UserContext);
-  document.title = `${context.username}'s Settings - Course Todo App`;
+  const { username, updateUsername } = useContext(UserContext);
+  document.title = `${username}'s Settings - Course Todo App`;
 
   // Error state
   const [errorMessages, setErrorMessages] = useState({
@@ -22,12 +22,10 @@ export default function Settings() {
     BackendApi.editUser(
       details,
       res => {
-        const { username } = res;
-
-        localStorage.setItem("username", username);
-        setContext(true, res.username);
+        localStorage.setItem("username", res.username);
+        updateUsername(res.username);
       },
-      err => {
+      () => {
         setErrorMessages({ details: "An error occured" });
       }
     );
@@ -54,7 +52,7 @@ export default function Settings() {
           <a className="btn" href="/">
             Back
           </a>
-          <h1 className="title--sm">{context.username}'s Settings</h1>
+          <h1 className="title--sm">{username}'s Settings</h1>
           <button className="btn" onClick={onSave}>
             Save
           </button>
@@ -62,7 +60,7 @@ export default function Settings() {
 
         <div className="setting-block">
           <h2 className="title--xsm">Edit details</h2>
-          <p className="text">Down below is your personal details</p>
+          <p className="text">Change your account details below</p>
           <p className="text--error">{errorMessages.details}</p>
 
           <div className="setting-field">
@@ -106,10 +104,7 @@ export default function Settings() {
             </label>
             <input
               type="checkbox"
-              onChange={e => {
-                setDeleteAccount(prev => !prev);
-                console.log(deleteAccount);
-              }}
+              onChange={e => setDeleteAccount(prev => !prev)}
             />
           </div>
           <p className="text--error">{errorMessages.deleteAccount}</p>

@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ErrorMessage from "../Components/ErrorMessage";
 import BackendApi from "../Utils/BackendApi";
 import { UserContext } from "../Context/UserContext";
-import { BrowserRouter } from "react-router";
 
 export default function Login() {
   document.title = "Login - TodoApp";
@@ -29,7 +28,7 @@ export default function Login() {
       res => {
         // Update the global context
         localStorage.setItem("username", res.username);
-        context.update(true, res.username);
+        context.update(res.username);
 
         // Redirect
         window.location = "/";
