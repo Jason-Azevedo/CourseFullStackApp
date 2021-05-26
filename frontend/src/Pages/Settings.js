@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../Context/UserContext";
 import BackendApi from "../Utils/BackendApi";
+import ErrorMessage from "../Components/ErrorMessage";
 
 export default function Settings() {
   const { username, updateUsername } = useContext(UserContext);
@@ -15,9 +16,11 @@ export default function Settings() {
   // Details state and save button callback:
   const [details, setDetails] = useState({ username: "", password: "" });
   const onSave = () => {
+    // Check if fields are empty
     if (details.username === "" || details.password === "") {
       setErrorMessages({ details: "Cannot have empty fields" });
     }
+
     // Save user settings!
     BackendApi.editUser(
       details,
@@ -61,7 +64,7 @@ export default function Settings() {
         <div className="setting-block">
           <h2 className="title--xsm">Edit details</h2>
           <p className="text">Change your account details below</p>
-          <p className="text--error">{errorMessages.details}</p>
+          <ErrorMessage error={errorMessages.details} />
 
           <div className="setting-field">
             <label className="label" htmlFor="username">
@@ -107,7 +110,7 @@ export default function Settings() {
               onChange={e => setDeleteAccount(prev => !prev)}
             />
           </div>
-          <p className="text--error">{errorMessages.deleteAccount}</p>
+          <ErrorMessage error={errorMessages.deleteAccount} />
           <button className="btn" onClick={onAccountDelete}>
             Delete
           </button>

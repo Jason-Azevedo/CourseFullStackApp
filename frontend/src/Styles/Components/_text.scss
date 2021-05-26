@@ -6,10 +6,4 @@
   color: $font-color;
   word-break: break-all;
   overflow-wrap: break-word;
-
-  &--error {
-    @extend .text;
-    font-weight: 700;
-    color: $input-error-color;
-  }
 }

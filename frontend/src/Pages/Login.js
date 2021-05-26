@@ -28,7 +28,7 @@ export default function Login() {
       res => {
         // Update the global context
         localStorage.setItem("username", res.username);
-        context.update(res.username);
+        context.updateUsername(res.username);
 
         // Redirect
         window.location = "/";
