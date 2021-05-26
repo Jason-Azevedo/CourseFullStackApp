@@ -10,6 +10,7 @@ export default function TodoDialog({
   const [todoDesc, setTodoDesc] = useState(todo.description);
   const [requiredText, setRequiredText] = useState("");
 
+  // The create/edit callback
   const onCreateClick = () => {
     if (todoTitle === "" || todoDesc === "") {
       setRequiredText("(Required)");
@@ -36,7 +37,7 @@ export default function TodoDialog({
           className="input"
           type="text"
           value={todoTitle}
-          onChange={(e) => setTodoTitle(e.target.value)}
+          onChange={e => setTodoTitle(e.target.value)}
         />
 
         <label className="label" htmlFor="">
@@ -48,7 +49,7 @@ export default function TodoDialog({
           cols="30"
           rows="10"
           value={todoDesc}
-          onChange={(e) => setTodoDesc(e.target.value)}
+          onChange={e => setTodoDesc(e.target.value)}
         ></textarea>
 
         <div>
