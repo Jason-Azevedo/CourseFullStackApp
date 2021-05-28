@@ -13,8 +13,8 @@ function App() {
   const [userContext, setUserContext] = useState("");
   const updateContext = username => setUserContext(username);
 
+  // Check if the user is logged in when the app first loads
   useEffect(() => {
-    // Check if the user is logged in
     const username = localStorage.getItem("username");
     if (username !== null) {
       updateContext(username);

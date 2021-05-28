@@ -28,9 +28,9 @@ export default function Home() {
   /**
    * A simple method for toggling the Create/Edit dialog
    *
-   * @param {boolean} editMode Render the dialog in Edit Mode
-   * @param {object} todo The todo object to use when the dialog is
-   * rendered in Edit Mode
+   * @param {boolean}  editMode - Render the dialog in Edit Mode
+   * @param {object}   todo     - The todo object to use when the dialog is
+   *                              rendered in Edit Mode
    * @returns void
    */
   const toggleDialog = (editMode = false, todo) =>
@@ -45,7 +45,8 @@ export default function Home() {
   /**
    *  A callback for when create or edit is clicked in the Todo Dialog,
    *  which then contacts the backend to either create or edit the todo.
-   * @param {object} todo The newly edited or created todo object
+   * 
+   * @param {object}  todo - The newly edited or created todo object
    */
   const onTodoDialogCompleteClick = todo => {
     if (dialogOptions.isEdit) {

@@ -1,13 +1,13 @@
 import React from "react";
 
 /**
- * Simple error message component
- * @param {string} error The error message to display
- * @returns Either error message or empty tages <></>
+ * An error message component to display error messages 
+ * 
+ * @returns Paragraph element with error message or empty tags <></>
  */
-export default function ErrorMessage({ error }) {
-  if (error !== "" && error !== undefined)
-    return <p className="error-message">{error}</p>;
+export default function ErrorMessage({ msg }) {
+  if (msg !== "" && msg !== undefined)
+    return <p className="error-message">{msg}</p>;
 
   return <> </>;
 }
