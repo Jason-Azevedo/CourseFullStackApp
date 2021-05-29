@@ -1,101 +1,95 @@
 const BackendApi = {};
 
-// General method for sending requests to the backend
-BackendApi.sendRequest = function (options, onSuccess, onFail) {
-  const bodyContent =
-    options.method === "GET" ? undefined : JSON.stringify(options.body);
-
+/**
+ * A wrapper around fetch that is used to send requests to the backend.
+ *
+ * @param {string}   method   - The method for the request, example: GET
+ * @param {string}   path     - The route for the request
+ * @param {object}   body     - The content to be sent in json to the backend
+ * @param {function} callback - A function with two params, data and error
+ *   which gets called on successfully contacting the backend.
+ */
+BackendApi.sendRequest = function (method, path, body, callback) {
   const fetchOptions = {
-    method: options.method,
+    method: method,
     headers: {
       "Content-Type": "application/json",
     },
-    body: bodyContent,
+    body: JSON.stringify(body),
   };
 
-  fetch(options.url, fetchOptions)
+  fetch(path, fetchOptions)
     .then(data => data.json())
     .then(res => {
       // Immediately redirect to login page if the server tells us to!
       if (res.redirect === "/login") window.location = "/login";
-      else if (res.error) onFail(res.error);
-      else onSuccess(res);
+      else callback(res, res.error);
     })
     .catch(console.error);
 };
 
-// Sends a login request to the backend
-// Returns a promise with the response from the backend in json format
-BackendApi.login = function (userCredentials, onSuccess, onFail) {
-  const options = {
-    url: "/login",
-    method: "POST",
-    body: userCredentials,
-  };
-
-  this.sendRequest(options, onSuccess, onFail);
+/**
+ * A general method for sending get requests.
+ *
+ * @param {string}   path     - The path for the request
+ * @param {function} callback - A function with two params, data
+ *  and error which gets called on successfully contacting the backend.
+ */
+BackendApi.get = function (path, callback) {
+  this.sendRequest("GET", path, undefined, callback);
 };
 
+/**
+ * A general method for sending post requests.
+ *
+ * @param {string}   path     - The path for the request
+ * @param {function} callback - A function with two params, data
+ *  and error which gets called on successfully contacting the backend.
+ */
+BackendApi.post = function (path, body, callback) {
+  this.sendRequest("POST", path, body, callback);
+};
+
+/**
+ * A general method for sending patch requests.
+ *
+ * @param {string}   path     - The path for the request
+ * @param {function} callback - A function with two params, data
+ *  and error which gets called on successfully contacting the backend.
+ */
+BackendApi.patch = function (path, body, callback) {
+  this.sendRequest("PATCH", path, body, callback);
+};
+
+/**
+ * A general method for sending delete requests.
+ *
+ * @param {string}   path     - The path for the request
+ * @param {function} callback - A function with two params, data
+ *  and error which gets called on successfully contacting the backend.
+ */
+BackendApi.delete = function (path, body, callback) {
+  this.sendRequest("DELETE", path, body, callback);
+};
+
+/**
+ *  A method for logging the user into their account.
+ *
+ * @param {object}    userCredentials - A object containing the username
+ *  and password of the user.
+ * @param {function}  callback        - A function with two params, data
+ *  and error which gets called on successfully contacting the backend.
+ */
+BackendApi.login = function (userCredentials, callback) {
+  this.post("/login", userCredentials, callback);
+};
+
+/**
+ * A method for logging the user out of their account.
+ */
 BackendApi.logout = function () {
   localStorage.clear();
-  this.sendRequest({ url: "/logout", method: "GET" });
-};
-
-BackendApi.createUser = function (userCredentials, onSuccess, onFail) {
-  const requestOptions = {
-    url: "/user",
-    method: "POST",
-    body: userCredentials,
-  };
-
-  this.sendRequest(requestOptions, onSuccess, onFail);
-};
-
-BackendApi.editUser = function (userCredentials, onSuccess, onFail) {
-  const requestOptions = {
-    url: "/user",
-    method: "PATCH",
-    body: userCredentials,
-  };
-
-  this.sendRequest(requestOptions, onSuccess, onFail);
-};
-
-BackendApi.deleteUser = function (onFail) {
-  const requestOptions = {
-    url: "/user",
-    method: "DELETE",
-    body: {},
-  };
-
-  // Do nothing for the onSuccess, because we are expecting default redirect behavior
-  this.sendRequest(requestOptions, () => {}, onFail);
-};
-
-BackendApi.sendTodoRequest = function (todo, method, onSuccess, onFail) {
-  const requestOptions = {
-    url: "/todo",
-    method: method,
-    body: todo,
-  };
-
-  this.sendRequest(requestOptions, onSuccess, onFail);
-};
-
-BackendApi.createTodo = function (todo, onSuccess, onFail) {
-  this.sendTodoRequest(todo, "POST", onSuccess, onFail);
-};
-
-BackendApi.editTodo = function (todo, onSuccess, onFail) {
-  this.sendTodoRequest(todo, "PATCH", onSuccess, onFail);
-};
-
-BackendApi.getTodos = function (onSuccess, onFail) {
-  this.sendTodoRequest(null, "GET", onSuccess, onFail);
-};
-
-BackendApi.deleteTodo = function (todo, onSuccess, onFail) {
-  this.sendTodoRequest(todo, "DELETE", onSuccess, onFail);
+  this.get("/logout");
 };
 
 export default BackendApi;
