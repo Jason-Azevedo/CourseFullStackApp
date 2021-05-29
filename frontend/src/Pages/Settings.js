@@ -21,28 +21,28 @@ export default function Settings() {
       setErrorMessages({ details: "Cannot have empty fields" });
     }
 
-    BackendApi.editUser(
-      details,
-      res => {
-        localStorage.setItem("username", res.username);
-        updateUsername(res.username);
-      },
-      () => {
+    BackendApi.patch("/user", details, (res, err) => {
+      if (err) {
         setErrorMessages({ details: "An error occured" });
+        return;
       }
-    );
+
+      localStorage.setItem("username", res.username);
+      updateUsername(res.username);
+    });
   };
 
   // Account delete section state and callback
   const [deleteAccount, setDeleteAccount] = useState(false);
   const onAccountDelete = () => {
+    console.log("Is this being called");
     if (!deleteAccount) {
       setErrorMessages({ deleteAccount: "Please tick the checkbox" });
       return;
     }
 
-    BackendApi.deleteUser(err => {
-      setErrorMessages({ deleteAccount: err });
+    BackendApi.delete("/user", undefined, (d, err) => {
+      if (err) setErrorMessages({ deleteAccount: err });
     });
   };
 
@@ -62,7 +62,7 @@ export default function Settings() {
         <div className="setting-block">
           <h2 className="title--xsm">Edit details</h2>
           <p className="text">Change your account details below</p>
-          <ErrorMessage error={errorMessages.details} />
+          <ErrorMessage msg={errorMessages.details} />
 
           <div className="setting-field">
             <label className="label" htmlFor="username">
@@ -108,7 +108,7 @@ export default function Settings() {
               onChange={e => setDeleteAccount(prev => !prev)}
             />
           </div>
-          <ErrorMessage error={errorMessages.deleteAccount} />
+          <ErrorMessage msg={errorMessages.deleteAccount} />
           <button className="btn" onClick={onAccountDelete}>
             Delete
           </button>

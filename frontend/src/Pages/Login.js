@@ -23,18 +23,19 @@ export default function Login() {
       return;
     }
 
-    BackendApi.login(
-      userCredentials,
-      res => {
-        // Update the global context
-        localStorage.setItem("username", res.username);
-        context.updateUsername(res.username);
+    BackendApi.login(userCredentials, (res, err) => {
+      if (err) {
+        setErrorMessage(err);
+        return;
+      }
 
-        // Redirect
-        window.location = "/";
-      },
-      setErrorMessage
-    );
+      // Update the global context
+      localStorage.setItem("username", res.username);
+      context.updateUsername(res.username);
+
+      // Redirect
+      window.location = "/";
+    });
   };
 
   return (
@@ -44,7 +45,7 @@ export default function Login() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Login</h1>
 
-          <ErrorMessage error={errorMessage} />
+          <ErrorMessage msg={errorMessage} />
 
           <label className="label" htmlFor="username-input">
             Username

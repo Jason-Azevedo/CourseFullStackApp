@@ -11,9 +11,23 @@ export default function Home() {
 
   const [todos, setTodos] = useState([]);
 
-  // Helper method to get our todos
-  const FetchTodos = () => {
-    BackendApi.getTodos(setTodos, console.error);
+  /**
+   * General method for getting our todos and if passed an error
+   * will log it.
+   *
+   * @param {string} err - Any potential error message to log
+   */
+  const FetchTodos = err => {
+    if (err) console.error(err);
+    else
+      BackendApi.get("/todo", (data, err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        setTodos(data);
+      });
   };
 
   // Fetch todos when the page is first done loading!
@@ -45,14 +59,14 @@ export default function Home() {
   /**
    *  A callback for when create or edit is clicked in the Todo Dialog,
    *  which then contacts the backend to either create or edit the todo.
-   * 
+   *
    * @param {object}  todo - The newly edited or created todo object
    */
   const onTodoDialogCompleteClick = todo => {
     if (dialogOptions.isEdit) {
-      BackendApi.editTodo(todo, FetchTodos, console.error);
+      BackendApi.patch("/todo", todo, (d, err) => FetchTodos(err));
     } else {
-      BackendApi.createTodo(todo, FetchTodos, console.error);
+      BackendApi.post("/todo", todo, (d, err) => FetchTodos(err));
     }
 
     toggleDialog();
@@ -70,7 +84,7 @@ export default function Home() {
             todoArr={todos}
             onEdit={todo => toggleDialog(true, todo)}
             onDelete={todo =>
-              BackendApi.deleteTodo(todo, FetchTodos, console.error)
+              BackendApi.delete("/todo", todo, (d, err) => FetchTodos(err))
             }
           />
         </div>

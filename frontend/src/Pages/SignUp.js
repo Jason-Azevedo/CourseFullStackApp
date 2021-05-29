@@ -31,8 +31,9 @@ export default function SignUp() {
       password: password,
     };
 
-    // Do nothing in onSuccess callback, because it will auto redirect to login
-    BackendApi.createUser(userCredentials, () => {}, setErrorMessage);
+    BackendApi.post("/user", userCredentials, (d, err) => {
+      if (err) setErrorMessage(err);
+    });
   };
 
   return (
@@ -42,7 +43,7 @@ export default function SignUp() {
           <h2 className="title--sm">Course Todo App</h2>
           <h1 className="title--lg">Create Account</h1>
 
-          <ErrorMessage error={errorMessage} />
+          <ErrorMessage msg={errorMessage} />
 
           <label className="label" htmlFor="username-input">
             Username
