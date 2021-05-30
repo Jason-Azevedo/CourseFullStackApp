@@ -7,7 +7,7 @@ import TodoDialog from "../Components/TodoDialog";
 
 export default function Home() {
   const { username } = useContext(UserContext);
-  document.title = `${username.username}'s Todos - Course Todo App`;
+  document.title = `${username}'s Todos - Course Todo App`;
 
   const [todos, setTodos] = useState([]);
 
