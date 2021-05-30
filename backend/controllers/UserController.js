@@ -27,7 +27,7 @@ exports.login = function (req, res) {
       }
 
       // Validation failed.
-      if (error) {
+      if (credentialError) {
         res.json({ error: "Invalid username or password" });
         return;
       }
