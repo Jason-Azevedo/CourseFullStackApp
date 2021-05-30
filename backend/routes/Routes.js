@@ -3,15 +3,15 @@ const TodoRoutes = require("./TodoRoutes");
 const UserRoutes = require("./UserRoutes");
 const UserController = require("../controllers/UserController");
 
-// TODO: Return react .html file in GET /
-router.route("/").get((req, res) => {
-  res.send("Hello World, from router!");
-});
-
 router.post("/login", UserController.login);
 router.get("/logout", UserController.logout);
 
-const registerRoutes = (app) => {
+/**
+ *  Registers all of the api routes for the app
+ *
+ * @param {object} app - The express app instance
+ */
+const registerRoutes = app => {
   // Register routes here
   app.use("/todo", TodoRoutes);
   app.use("/user", UserRoutes);
